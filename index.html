@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游逸旅闻全角色汇总</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="scroll-top">
+        <span>↑</span>
+    </div>
+    
+    <div class="container">
+        <!-- 日式古风背景装饰 -->
+        <div class="jp-pattern"></div>
+        
+        <!-- 标题区域 -->
+        <header class="header">
+            <div class="title-decoration">
+                <div class="decoration-left"></div>
+                <h1>游逸旅闻全角色汇总</h1>
+                <div class="decoration-right"></div>
+            </div>
+        </header>
+        
+        <!-- 主要内容区域 -->
+        <main class="content">
+            <!-- 注意事项区域 -->
+            <section class="notice-section">
+                <h2>注意事项</h2>
+                <div class="notice-box">
+                    <ul class="notice-list">
+                        <li>隐藏游逸旅闻目前来说一般1天仅能触发1条，概率触发，没刷出的可以第二天再试试看</li>
+                        <li>目前全部完成是有108个记录，共116个逸闻印签，原因是鹿野院平藏的 [静待] 和 爱诺的 [时间足够你道别] 做完会1次会给5个逸闻印签</li>
+                        <li>目前完成重复游逸旅闻可能还会给逸闻印签，不确定</li>
+                        <li>要想统计自己获取的逸闻印签总数量：计算公式 =（自助查询路径：米游社-联系客服-原神-货币记录-原石）「游逸旅闻」奖励 +50 的数据条数 × 10 + 游戏内逸闻印签数量</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 过滤和搜索区域 -->
+            <section class="filter-section">
+                <div class="filter-controls">
+                    <div class="filter-group">
+                        <label for="region-filter">地区筛选：</label>
+                        <select id="region-filter">
+                            <option value="all">全部地区</option>
+                            <option value="蒙德">蒙德</option>
+                            <option value="璃月">璃月</option>
+                            <option value="稻妻">稻妻</option>
+                            <option value="须弥">须弥</option>
+                            <option value="枫丹">枫丹</option>
+                            <option value="纳塔">纳塔</option>
+                            <option value="挪德卡莱">挪德卡莱</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="version-filter">版本筛选：</label>
+                        <select id="version-filter">
+                            <option value="all">全部版本</option>
+                            <option value="5.4">5.4</option>
+                            <option value="5.7">5.7</option>
+                            <option value="月之一">月之一</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="search-input">搜索：</label>
+                        <input type="text" id="search-input" placeholder="输入...">
+                    </div>
+                    <button id="clear-filter" class="btn-clear">清除</button>
+                </div>
+            </section>
+            
+            <!-- 角色汇总表格区域 -->
+            <section class="table-section">
+                <h2>汇总</h2>
+                <div class="table-container">
+                    <table class="character-table">
+                        <thead>
+                            <tr>
+                                <th>总计数</th>
+                                <th>角色</th>
+                                <th>版本</th>
+                                <th>游逸旅闻<br><small>(斜体为隐藏)</small></th>
+                                <th>地点</th>
+                                <th>隐藏触发条件</th>
+                                <th>额外出场角色</th>
+                                <th>游逸旅闻描述</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- 表格内容将由JavaScript动态生成 -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- 月之一版本新增区域 -->
+            <section class="new-version-section">
+                <h2>月之一版本新增（挪德卡莱地区）</h2>
+                <div class="table-container">
+                    <table class="character-table">
+                        <thead>
+                            <tr>
+                                <th>角色</th>
+                                <th>游逸旅闻<br><small>(斜体为隐藏)</small></th>
+                                <th>地点</th>
+                                <th>隐藏触发条件</th>
+                                <th>额外出场角色</th>
+                            </tr>
+                        </thead>
+                        <tbody id="new-version-body">
+                            <!-- 表格内容将由JavaScript动态生成 -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+        
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>原神 · 游逸旅闻全角色汇总</p>
+                <p>最后更新：2025年10月5日</p>
+                <p>元数据更新：2025年10月5日</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

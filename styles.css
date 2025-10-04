@@ -1,0 +1,448 @@
+/* 基础样式设置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 全局样式 */
+body {
+    font-family: "SimSun", "FangSong", serif;
+    background-color: #f7f0e6;
+    color: #333;
+    line-height: 1.6;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 50 C60 40, 70 40, 80 50 C90 60, 90 70, 80 80 C70 90, 60 90, 50 80 C40 90, 30 90, 20 80 C10 70, 10 60, 20 50 C30 40, 40 40, 50 50' fill='none' stroke='%23d1b78e' stroke-width='0.5' opacity='0.3'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+}
+
+/* 回到顶部按钮 */
+.scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #a86c4c;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(20px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.scroll-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-top:hover {
+    background-color: #8c543a;
+}
+
+/* 容器 */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+}
+
+/* 日式图案背景 */
+.jp-pattern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L10 0 L10 10 L0 10 Z' fill='none' stroke='%23d1b78e' stroke-width='0.5' opacity='0.2'/%3E%3Cpath d='M10 10 L20 10 L20 20 L10 20 Z' fill='none' stroke='%23d1b78e' stroke-width='0.5' opacity='0.2'/%3E%3C/svg%3E");
+    z-index: -1;
+}
+
+/* 标题区域 */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.title-decoration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.decoration-left,
+.decoration-right {
+    width: 80px;
+    height: 3px;
+    background-color: #a86c4c;
+    position: relative;
+    margin: 0 20px;
+}
+
+.decoration-left::before,
+.decoration-right::before,
+.decoration-left::after,
+.decoration-right::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 3px solid #a86c4c;
+    border-radius: 50%;
+    background-color: #f7f0e6;
+}
+
+.decoration-left::before,
+.decoration-right::before {
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+.decoration-left::after,
+.decoration-right::after {
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%);
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    color: #8c543a;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    letter-spacing: 2px;
+}
+
+/* 主要内容区域 */
+.content {
+    position: relative;
+}
+
+/* 注意事项区域 */
+.notice-section {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 25px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    border: 1px solid #d1b78e;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.notice-section h2 {
+    color: #8c543a;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #d1b78e;
+    padding-bottom: 10px;
+}
+
+.notice-box {
+    background-color: rgba(247, 240, 230, 0.8);
+    border-radius: 6px;
+    padding: 20px;
+}
+
+.notice-list {
+    list-style-type: none;
+}
+
+.notice-list li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    line-height: 1.8;
+}
+
+.notice-list li::before {
+    content: '•';
+    color: #a86c4c;
+    font-size: 1.5em;
+    position: absolute;
+    left: 0;
+    top: -5px;
+}
+
+/* 过滤和搜索区域 */
+.filter-section {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    border: 1px solid #d1b78e;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-group label {
+    color: #8c543a;
+    font-weight: bold;
+}
+
+.filter-group select,
+.filter-group input {
+    padding: 8px 12px;
+    border: 1px solid #d1b78e;
+    border-radius: 4px;
+    background-color: #f7f0e6;
+    color: #333;
+    font-family: "SimSun", serif;
+}
+
+.btn-clear {
+    padding: 8px 16px;
+    background-color: #a86c4c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "SimSun", serif;
+    transition: background-color 0.3s ease;
+}
+
+.btn-clear:hover {
+    background-color: #8c543a;
+}
+
+/* 表格区域 */
+.table-section,
+.new-version-section {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 25px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    border: 1px solid #d1b78e;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.table-section h2,
+.new-version-section h2 {
+    color: #8c543a;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #d1b78e;
+    padding-bottom: 10px;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.character-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.character-table th,
+.character-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #d1b78e;
+}
+
+.character-table th {
+    background-color: #e9d9c5;
+    color: #8c543a;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.character-table tr:nth-child(even) {
+    background-color: rgba(247, 240, 230, 0.7);
+}
+
+.character-table tr:hover {
+    background-color: rgba(233, 217, 197, 0.4);
+}
+
+.character-table small {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* 隐藏的游逸旅闻斜体样式 */
+.hidden-travel {
+    font-style: italic;
+    color: #8c543a;
+}
+
+/* 区域高亮 */
+.region-mondstadt td:nth-child(5) {
+    background-color: rgba(147, 197, 253, 0.2);
+}
+
+.region-liyue td:nth-child(5) {
+    background-color: rgba(251, 191, 36, 0.2);
+}
+
+.region-inazuma td:nth-child(5) {
+    background-color: rgba(244, 114, 182, 0.2);
+}
+
+.region-sumeru td:nth-child(5) {
+    background-color: rgba(34, 197, 94, 0.2);
+}
+
+.region-fontaine td:nth-child(5) {
+    background-color: rgba(96, 165, 250, 0.2);
+}
+
+.region-natlan td:nth-child(5) {
+    background-color: rgba(239, 68, 68, 0.2);
+}
+
+.region-nordkala td:nth-child(5) {
+    background-color: rgba(167, 139, 250, 0.2);
+}
+
+/* 页脚 */
+.footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: #8c543a;
+    border-top: 1px solid #d1b78e;
+}
+
+.footer-content p {
+    font-size: 1rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .filter-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-group {
+        justify-content: space-between;
+    }
+    
+    .table-section,
+    .new-version-section {
+        padding: 15px;
+    }
+    
+    /* 表格在移动端隐藏 */
+    .character-table {
+        display: none;
+    }
+    
+    /* 移动端卡片容器 */
+    .card-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    /* 卡片样式 */
+    .character-card {
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 1px solid #d1b78e;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    /* 卡片装饰 */
+    .character-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: #a86c4c;
+    }
+    
+    /* 地区装饰条 */
+    .card-mondstadt::before { background-color: #93c5fd; }
+    .card-liyue::before { background-color: #fbbf24; }
+    .card-inazuma::before { background-color: #f472b6; }
+    .card-sumeru::before { background-color: #22c55e; }
+    .card-fontaine::before { background-color: #60a5fa; }
+    .card-natlan::before { background-color: #ef4444; }
+    .card-nordkala::before { background-color: #a78bfa; }
+    
+    /* 卡片标题 */
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    
+    .card-character {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #8c543a;
+    }
+    
+    .card-version {
+        background-color: #e9d9c5;
+        color: #8c543a;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+    }
+    
+    /* 卡片内容 */
+    .card-content {
+        margin-bottom: 10px;
+    }
+    
+    .card-item {
+        margin-bottom: 8px;
+    }
+    
+    .card-label {
+        font-weight: bold;
+        color: #8c543a;
+        display: block;
+        margin-bottom: 4px;
+        font-size: 0.9rem;
+    }
+    
+    .card-value {
+        font-size: 0.9rem;
+        color: #333;
+    }
+    
+    /* 隐藏的游逸旅闻 */
+    .card-value.hidden-travel {
+        font-style: italic;
+        color: #8c543a;
+    }
+}

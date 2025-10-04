@@ -1,0 +1,694 @@
+// 角色汇总数据
+const characterData = [
+    { id: 1, character: "迪卢克（1）", version: "5.4", travelName: "定价", location: "蒙德-晨曦酒庄", hiddenCondition: "", extraCharacter: "", description: "在晨曦酒庄，你遇见了刚看完酒庄销售汇报的迪卢克。气候易变，人情与人心却不易改。", isHidden: false },
+    { id: 2, character: "砂糖(1)", version: "5.4", travelName: "观测", location: "蒙德-千风神殿", hiddenCondition: "", extraCharacter: "", description: "在千风神殿附近，你遇见了正在观察白鸽与遗迹守卫的砂糖。提瓦特上未知的秘密还有很多，而这也是「出行」才能带来的收获。", isHidden: false },
+    { id: 3, character: "诺艾尔(1)", version: "5.4", travelName: "①剑术", location: "蒙德-蒙德城", hiddenCondition: "", extraCharacter: "", description: "在西风骑士团旁，你遇见了正在练习着武艺的诺艾尔。但从现场情况来看，她练习得似乎并不顺利...", isHidden: false },
+    { id: 4, character: "诺艾尔(2)", version: "5.4", travelName: "②进步法", location: "蒙德-蒙德城", hiddenCondition: "", extraCharacter: "琴", description: "在西风骑士团旁，你遇见了正指导诺艾尔练习剑术的琴。有了她的指导，或许诺艾尔的剑技能够再进一步。", isHidden: false },
+    { id: 5, character: "罗莎莉亚(1)", version: "5.4", travelName: "①工作", location: "蒙德-蒙德城", hiddenCondition: "", extraCharacter: "", description: "在西风大教堂旁，你遇见了正在完成教会「慈善帮助工作」的罗莎莉亚。就结果来看..她其实还完成得不错?", isHidden: false },
+    { id: 6, character: "罗莎莉亚(2)", version: "5.4", travelName: "②本职工作", location: "蒙德-蒙德城", hiddenCondition: "", extraCharacter: "", description: "在「天使的馈赠」，你遇见了正在盯梢可疑人员的罗莎莉亚。她目光炯炯，出手利落，如深夜的月光一样寒冷、锐利..", isHidden: false },
+    { id: 7, character: "罗莎莉亚(3)", version: "5.4", travelName: "③假日", location: "蒙德-蒙德城", hiddenCondition: "", extraCharacter: "温迪", description: "在猫尾酒馆旁，你遇见了正在望风的罗莎莉亚。你应吟游诗人的邀请，加入了这场短暂的聚会，在美妙的碰杯声中度过了一段自由的时光。", isHidden: false },
+    { id: 8, character: "菲谢尔(1)", version: "5.4", travelName: "①修订", location: "蒙德-蒙德城", hiddenCondition: "", extraCharacter: "", description: "蒙德图书馆中，断罪皇女菲谢尔与她的忠友奥兹降临于此，从他们佶屈聱牙的话语中勉强得知，他们此行的目的是修订一本名为《断罪圣诰之书》的辞典...", isHidden: false },
+    { id: 9, character: "菲谢尔(2)", version: "5.4", travelName: "②魔女", location: "蒙德-蒙德城", hiddenCondition: "", extraCharacter: "", description: "《断罪圣诰之书》的修订工作并不顺利，那位司书的魔女似乎意图与伟大的幽夜净土主宰为敌...", isHidden: false },
+    { id: 10, character: "菲谢尔(3)", version: "5.4", travelName: "③命运时刻", location: "蒙德-蒙德城", hiddenCondition: "", extraCharacter: "", description: "用断罪皇女的语言来说，那命运承诺的时刻终于在今天显现了...", isHidden: false },
+    { id: 11, character: "迪奥娜(1)", version: "5.4", travelName: "①打猎", location: "蒙德-奔狼领", hiddenCondition: "", extraCharacter: "", description: "在奔狼领，你遇见了正在独自打猎的迪奥娜。凯茨莱茵家的猎手听觉敏锐，却也会带来害怕狼群的小小麻烦。", isHidden: false },
+    { id: 12, character: "迪奥娜(2)", version: "5.4", travelName: "②委托", location: "蒙德-清泉镇", hiddenCondition: "", extraCharacter: "砂糖", description: "在清泉镇上，你遇见了和砂糖进行货品交换的迪奥娜。用富含胡萝卜素的落落莓作为诱饵...到底会吸引具有哪种口味偏好的动物呢?", isHidden: false },
+    { id: 13, character: "迪奥娜(3)", version: "5.4", travelName: "③空空如也", location: "蒙德-奔狼领", hiddenCondition: "", extraCharacter: "", description: "在奔狼领，你遇见了失落沮丧的迪奥娜，她说自己布下的陷阱空空如也。看来，只有抓到那个什么都吃的坏家伙，才能保住迪奥娜的尊严了...", isHidden: false },
+    { id: 14, character: "迪奥娜(4)", version: "5.4", travelName: "④猎物的真面目", location: "蒙德-奔狼领", hiddenCondition: "", extraCharacter: "雷泽", description: "在奔狼领，你遇见了快要晕倒的雷泽。原来他将诱饵当作了来自清泉镇的礼物，这才误食了药草。这啼笑皆非的误会波及的受書者，好像还有一人...", isHidden: false },
+    { id: 15, character: "安柏(1)", version: "5.4", travelName: "①你好，旅行者", location: "蒙德-低语森林", hiddenCondition: "", extraCharacter: "", description: "在蒙德城外，你遇见了一个火红色的身影。蒙德城的侦察骑士向你问好。", isHidden: false },
+    { id: 16, character: "安柏(2)", version: "5.4", travelName: "②蒙德城的猫", location: "蒙德-蒙德城", hiddenCondition: "", extraCharacter: "", description: "在蒙德城的城墙上，你遇见了安柏，她刚把一只调皮的小猫送回了它主人的家中。希望那只小猫别再跑出来了...", isHidden: false },
+    { id: 17, character: "安柏(3)", version: "5.4", travelName: "③区区史莱姆", location: "蒙德-坠星山谷", hiddenCondition: "", extraCharacter: "", description: "在星落湖旁，你遇见了正在执行任务的安柏。区区史莱姆，不在话下。", isHidden: false },
+    { id: 18, character: "安柏(4)", version: "5.4", travelName: "④飞起来看看", location: "蒙德-奔狼领", hiddenCondition: "", extraCharacter: "", description: "在奔狼领，你遇见了气喘吁吁的安柏，为了帮可莉将礼物送给雷泽，她正在四处搜寻。但雷泽...看来并不是那么容易遇到", isHidden: false },
+    { id: 19, character: "安柏(5)", version: "5.4", travelName: "⑤休息日", location: "蒙德-蒙德城", hiddenCondition: "", extraCharacter: "", description: "在西风大教堂的顶端，你与安柏度过了一段休息时间。但是，这位蒙德城最好的「侦察骑士」的休息时间也如同风一般来去匆匆...", isHidden: false },
+    { id: 20, character: "刻晴(1)", version: "5.4", travelName: "奔走", location: "璃月-璃月港", hiddenCondition: "", extraCharacter: "", description: "在「不卜庐」外，你遇见了前来拿药的刻晴。她前几天在探查山林时不小心扭到了脚腕，好在如今已经痊愈。但看她神情，似乎还有许多工作要做...", isHidden: false },
+    { id: 21, character: "七七(1)", version: "5.4", travelName: "烹饪", location: "璃月-璃月港", hiddenCondition: "（锅巴）", extraCharacter: "", description: "在万民堂，你遇见了钻研烹饪之道的七七。在锅巴的帮助下，她准备好了郊游的菜肴...辛苦了，锅巴。", isHidden: false },
+    { id: 22, character: "钟离(1)", version: "5.4", travelName: "①茶", location: "璃月-璃月港", hiddenCondition: "", extraCharacter: "", description: "在说书人刘苏的摊位旁，你刚巧遇见了打算品尝枫丹茶叶的钟离，在他的邀请下，你坐下来与他共品新茶，小谈了片刻。或许是钟离泡茶手法得当，枫丹的茶叶与璃月的泉水完美交融，味道十分出色。", isHidden: false },
+    { id: 23, character: "钟离(2)", version: "5.4", travelName: "②书", location: "璃月-璃月港", hiddenCondition: "", extraCharacter: "", description: "在万文集舍的摊位旁，你遇见了若有所思的钟离。据他所说，是受「往生堂」堂主胡桃所托，前来购买几本「轻小说」。在稍微翻看了几本后，钟离也似乎对这种小说产生了兴趣.", isHidden: false },
+    { id: 24, character: "钟离(3)", version: "5.4", travelName: "③戏", location: "璃月-遗珑埠", hiddenCondition: "", extraCharacter: "", description: "在遗珑埠的戏台下，你遇见了正听完了一场戏的钟离。他因为听云革唱戏入了神，不小心凉了一壶好茶，但好在戏曲余味无穷，倒也算不上亏了摩拉。", isHidden: false },
+    { id: 25, character: "申鹤(1)", version: "5.4", travelName: "萦怀", location: "璃月-璃月港", hiddenCondition: "", extraCharacter: "", description: "在万民堂内，你遇见了独自看店的申鹤。旧友的到来让她感到欣喜，主动下厨烹饪你们喜欢的菜式。过程虽有插曲，但结果美味不减。", isHidden: false },
+    { id: 26, character: "闲云(1)", version: "5.4", travelName: "①弟子的礼物", location: "璃月-璃月港", hiddenCondition: "", extraCharacter: "申鹤", description: "在闲云的屋宅附近，你遇见了正在劝导中鹤的闲云，原来中鹤用自己的工钱为闲云报名了旅行团，闲云虽嘴上说着拒绝，但喜悦溢于言表...", isHidden: false },
+    { id: 27, character: "闲云(2)", version: "5.4", travelName: "②星崖掠影", location: "蒙德-摘星崖", hiddenCondition: "", extraCharacter: "", description: "在摘星崖崖顶，你遇见了初来蒙德游览的闲云，她心情不错。在闲云看来，美丽的风光和难忘的心绪一样值得留念，于是她拿出了留影机...", isHidden: false },
+    { id: 28, character: "闲云(3)", version: "5.4", travelName: "③蒙德印象", location: "蒙德-坠星山谷", hiddenCondition: "", extraCharacter: "", description: "在蒙德城门前，你遇见了正在关注禽鸟动态的闲云，她对接下来要拍的画片构图有独特审美，这一点在她此前拍过的所有蒙德画片中均有呈现。仙人品味，果真非同凡响。", isHidden: false },
+    { id: 29, character: "闲云(4)", version: "5.4", travelName: "④奔狼巧遇", location: "蒙德-奔狼领", hiddenCondition: "", extraCharacter: "雷泽", description: "在奔狼领附近，你遇见了一脸愁容的闲云和茫然无措的雷泽，热心的闲云似乎难以接受成长期的少年独自在野外游荡，无论如何，都没办法放任不管吧？", isHidden: false },
+    { id: 30, character: "闲云(5)", version: "5.4", travelName: "⑤叨光受赞", location: "璃月-璃月港", hiddenCondition: "", extraCharacter: "申鹤", description: "在闲云的屋宅外，闲云被上门致谢的群众团团围住，原来是中鹤打倒黑心旅团的义举惠及了不少街坊，作为家长表率的闲云正忙于回应，乐在其中。而在另一个安静的角落，申鹤也有要感谢的人...", isHidden: false },
+    { id: 31, character: "凝光(1)", version: "5.4", travelName: "重任", location: "璃月-天衡山", hiddenCondition: "", extraCharacter: "白术", description: "在「群玉阁」上，你发现凝光的神色有些疲惫。原来是不小心染上了风寒。但是，即便身体有恙，璃月港的「天权星」依旧坚持着工作。毕竟，她重任在肩。", isHidden: false },
+    { id: 32, character: "香菱(1)", version: "5.4", travelName: "甜甜香膏", location: "璃月-璃月港", hiddenCondition: "", extraCharacter: "胡桃", description: "在万民堂外，你遇见了香菱和胡桃。香菱最近似乎拿到了一款杏仁豆腐味道的新型香膏，抹上身后非常好闻。唔...但这次的香膏是杏仁豆腐味，那下次，不会是水煮鱼味吧...", isHidden: false },
+    { id: 33, character: "瑶瑶(1)", version: "5.4", travelName: "①练枪", location: "璃月-璃月港", hiddenCondition: "", extraCharacter: "", description: "在玉京台附近，你遇见了努力练枪的瑶瑶。她向师父告了假，计划着要和好友七七一起去轻策庄郊游...", isHidden: false },
+    { id: 34, character: "瑶瑶(2)", version: "5.4", travelName: "②郊游", location: "璃月-碧水原", hiddenCondition: "", extraCharacter: "七七", description: "在轻策庄郊外，你遇见了正在欣赏璃月风光的七七和瑶瑶。女孩们手牵着手，许下的约定由山和水和你见证。", isHidden: false },
+    { id: 35, character: "云堇(1)", version: "5.4", travelName: "①他山之石", location: "璃月-璃月港", hiddenCondition: "", extraCharacter: "", description: "在刘苏的摊位旁，你遇见了正在听刘苏说书的云堇。听云堇所说的话，她似乎正准备排一场新戏...", isHidden: false },
+    { id: 36, character: "云堇(2)", version: "5.4", travelName: "②来者是客", location: "璃月-璃月港", hiddenCondition: "", extraCharacter: "可莉、凯亚", description: "在和裕茶馆，你遇见了凯亚与可莉。看可莉的模样，似乎玩得非常高兴，也非常喜欢云堇这位「唱璃月戏的大姐姐」。", isHidden: false },
+    { id: 37, character: "行秋(1)", version: "5.4", travelName: "①书剑之一", location: "璃月-碧水原", hiddenCondition: "", extraCharacter: "", description: "在轻策庄的竹林里，你遇见了正在以剑入书的行秋，他打算用舞剑的方式练习书法。虽不知结果如何，但若看周围宛如秋风过境般的竹林，想必行秋也是勤奋练了很久吧...", isHidden: false },
+    { id: 38, character: "行秋(2)", version: "5.4", travelName: "②书剑之二", location: "璃月-碧水原", hiddenCondition: "", extraCharacter: "", description: "在轻策庄外的竹林里，行秋依然在尝试以剑入书。但是，他好像又看书入了神，忘记了练剑...", isHidden: false },
+    { id: 39, character: "行秋(3)", version: "5.4", travelName: "③事急从权！", location: "璃月-碧水原", hiddenCondition: "", extraCharacter: "重云", description: "在轻策庄外的竹林里，你遇见了急到六神无主的行秋。一问才知，往日里帮行秋写小说的编辑病倒了，他请来重云帮忙，但听着好友念诵自己的小说，行秋又羞得不知如何是好。不过，为了让小说稿件赶上出版日，行秋也只能事急从权了...", isHidden: false },
+    { id: 40, character: "行秋(4)", version: "5.4", travelName: "④一字千金", location: "璃月-璃月港", hiddenCondition: "", extraCharacter: "", description: "在万文集舍，你遇见了似乎正若有所思的行秋，顺着他的指引，你看见了书架上许多一样内容的书籍，但是，凭着扉页签字笔画不同，这些书却被硬生生分出了三六九等，有人说「一字如金」，或许也不外如是吧...", isHidden: false },
+    { id: 41, character: "珊瑚宫心海(1)", version: "5.4", travelName: "①孤梦", location: "稻妻-海祇岛", hiddenCondition: "", extraCharacter: "", description: "在鲜有人知的「海祇岛秘密基地」里，你遇见了熟睡的心海。桌上散落着各种文件，以及少女写满心事的日记。", isHidden: false },
+    { id: 42, character: "珊瑚宫心海(2)", version: "5.4", travelName: "②团聚", location: "稻妻-珊瑚宫", hiddenCondition: "", extraCharacter: "", description: "在海祇岛，故地重游仍有故人相伴。山长水阔，前路漫漫，有人在此遥寄一番思念。", isHidden: false },
+    { id: 43, character: "枫原万叶(1)", version: "5.4", travelName: "①远望天地", location: "璃月-云来海", hiddenCondition: "", extraCharacter: "", description: "归离原以南的山野，你遇见了抒发诗兴的万叶。偶遇故人自是一件趣事，人生何处不相逢？", isHidden: false },
+    { id: 44, character: "枫原万叶(2)", version: "5.4", travelName: "②旅途小感", location: "璃月-云来海", hiddenCondition: "", extraCharacter: "", description: "璃月港北方的海边，你遇见了眺望大海的万叶。你们说起旅途的快乐与疲惫...生活难有真正的圆满，唯有心静可解万般愁绪。", isHidden: false },
+    { id: 45, character: "枫原万叶(3)", version: "5.4", travelName: "③剑与酒", location: "璃月-天衡山", hiddenCondition: "", extraCharacter: "", description: "天衡山以北，你遇见了夜晚练剑的万叶。天亮时，你们就要各自踏上旅程，但无论路途多么遥远，仍在同一片星空之下。", isHidden: false },
+    { id: 46, character: "八重神子(1)", version: "5.7", travelName: "好运气", location: "稻妻-鸣神大社", hiddenCondition: "", extraCharacter: "", description: "在八重神子的「帮助」下，你抽到了一根特殊的签。总之...还是好好收起来吧。说不定，真有神奇的力量...?", isHidden: false },
+    { id: 47, character: "神里绫人(1)", version: "5.7", travelName: "事务", location: "稻妻-稻妻城", hiddenCondition: "", extraCharacter: "", description: "在你的帮助下，神里绫人挑选好了布匹，按照他的说法，过几天这些布匹应该就会被送到「神里屋敷」里了...", isHidden: false },
+    { id: 48, character: "梦见月瑞希(1)", version: "5.7", travelName: "①新患者", location: "稻妻-稻妻城-秋沙钱汤", hiddenCondition: "", extraCharacter: "莱依拉", description: "在导师的建议下，莱依拉来到了「秋沙钱汤」。在放松的同时，也想寻求梦见月瑞希的帮助，但是，莱依拉的状况似乎越来越糟糕...或许，梦见月瑞希会有什么办法...", isHidden: false },
+    { id: 49, character: "梦见月瑞希(2)", version: "5.7", travelName: "②诊疗", location: "稻妻-稻妻城-秋沙钱汤", hiddenCondition: "", extraCharacter: "莱依拉", description: "在诊疗过程里，莱依拉又进入了「梦游状态」。在和「莱依拉」聊过后，梦见月瑞希更加了解了莱依拉如今的状态。或许，她能想出一个更加完备的治疗方案...?", isHidden: false },
+    { id: 50, character: "早柚(1)", version: "5.7", travelName: "长高的...方法?", location: "稻妻-稻妻城", hiddenCondition: "", extraCharacter: "多莉", description: "在你的「监督」下，多莉终于答应免费将药水提供给早柚先行体验。不过，这位商人永远不会做亏本的生意，或许...这一次的「优惠」也早就在她的预料之内了...?", isHidden: false },
+    { id: 51, character: "托马(1)", version: "5.7", travelName: "①培训考试", location: "稻妻-稻妻城", hiddenCondition: "", extraCharacter: "久岐忍", description: "社奉行组织的技能培训课与考试得到了许多人的认可，忙前忙后的托马即将迎来悠长假期...", isHidden: false },
+    { id: 52, character: "托马(2)", version: "5.7", travelName: "②悠长假期", location: "蒙德-蒙德城-天使的馈赠", hiddenCondition: "", extraCharacter: "凯亚", description: "为了完成母亲的嘱托，久未归乡的托马回到了蒙德城。酒馆、街道还有热情的朋友，蒙德依然像他记忆中一样温暖。", isHidden: false },
+    { id: 53, character: "绮良良(1)", version: "5.7", travelName: "①热腾腾", location: "璃月-璃月港", hiddenCondition: "", extraCharacter: "香菱", description: "在桌子上用来洗菜的水不知道换了多少杯之后，绮良良终于吃饱了。...但下次，能不能把这道菜做成不辣的呢？", isHidden: false },
+    { id: 54, character: "绮良良(2)", version: "5.7", travelName: "②凉丝丝", location: "璃月-璃月港", hiddenCondition: "", extraCharacter: "香菱、重云", description: "在重云的帮助下，绮良良总算是吃到了一份好吃的凉菜，同时，绮良良也答应重云，将带他去稻妻，并且把五百藏与荒泷一斗介绍给他认识。等重云收拾好行李后，他们就会出发。", isHidden: false },
+    { id: 55, character: "绮良良(3)", version: "5.7", travelName: "③我的快递！", location: "稻妻-镇守之森", hiddenCondition: "", extraCharacter: "", description: "在镇守之森里，绮良良被五百藏拦住，陪着小妖怪们不停地玩着捉迷藏。虽然五百藏让另外一只小妖怪将快递送给了收件人...", isHidden: false },
+    { id: 56, character: "鹿野院平藏(1)", version: "5.7", travelName: "①怪案", location: "稻妻-稻妻城", hiddenCondition: "", extraCharacter: "", description: "在花见坂，你遇见了正在因为一桩「怪案」而苦恼的鹿野院平藏。据他说，犯罪者私自闯入居民家中，但却什么也没有偷。而且，所有被入室的民宅里都有一个共同点，那就是收藏着一本罪案小说：《应避忌的食人树》。以此为线索，鹿野院平藏有了一个初步的推理。以他的推理为基础，天领奉行已经外出巡查，准备去缉拿这位奇怪的罪犯。", isHidden: false },
+    { id: 57, character: "鹿野院平藏(2)", version: "5.7", travelName: "②真相", location: "稻妻-稻妻城", hiddenCondition: "", extraCharacter: "", description: "犯下那桩「怪案」的犯人被缉拿归案。而这位犯人做下罪案的原因，则是因为自己无心将一份「表白信」夹在了一本旧书之中，当他意识到问题，并赶去店里想要拿回表白信时，却得知那本陈旧的《应避忌的食人树》已然被他人买走。六神无主之下，他决定按照书中描述的犯罪方法，将自己的那封信偷回来...", isHidden: false },
+    { id: 58, character: "鹿野院平藏(3)", version: "5.7", travelName: "③追缉", location: "稻妻-稻妻城", hiddenCondition: "", extraCharacter: "", description: "又一桩案件找上了鹿野院平藏。这次的犯罪团伙似乎颇有经验和手段，鹿野院平藏一时半会居然找不到案件的突破口。", isHidden: false },
+    { id: 59, character: "鹿野院平藏(4)", version: "5.7", travelName: "④静待...", location: "稻妻-白狐之野", hiddenCondition: "", extraCharacter: "", description: "鹿野院平藏似乎暂时没有找到案件的突破口。但是，线索一定存在于某个地方...", isHidden: true },
+    { id: 60, character: "鹿野院平藏(5)", version: "5.7", travelName: "⑤破案日", location: "稻妻-白狐之野", hiddenCondition: "", extraCharacter: "", description: "在多莉的「慷慨帮助」下，鹿野院平藏终于找到了贩卖违禁药物的元凶，并且将其绳之以法。但是，那位商人...似乎也已经拿到了自己的「报酬」。", isHidden: false },
+    { id: 61, character: "鹿野院平藏(6)", version: "月之一", travelName: "⑥他人之罪", location: "挪德莱-伦波岛-那夏镇-旗舰酒馆", hiddenCondition: "", extraCharacter: "雅珂达", description: "在那夏镇，你遇见了因查案而抵达挪德莱卡的鹿野院平藏，他所找到的向导正好是「秘闻馆」的雅珂达。不过，怎么感觉雅珂达和平藏聊天时，显得有些紧张...?", isHidden: false },
+    { id: 62, character: "迪希雅 (1)", version: "5.7", travelName: "①机关舞步", location: "枫丹-枫丹廷", hiddenCondition: "", extraCharacter: "", description: "迪希雅正拍握着培珞琉司的舞步，预备着带回去给妮露和迪娜泽黛看看。据迪希雅说，如果需要的话，她也可以...跳男步？", isHidden: false },
+    { id: 63, character: "迪希雅 (2)", version: "5.7", travelName: "②裙子", location: "枫丹-枫丹廷", hiddenCondition: "", extraCharacter: "千织", description: "在千织的建议下，迪希雅决定为自己买一条新裙子。听起来，会是一条很漂亮的裙子。", isHidden: false },
+    { id: 64, character: "赛诺 (1)", version: "5.7", travelName: "①估量", location: "须弥-净甸", hiddenCondition: "", extraCharacter: "提纳里", description: "这一份有关蘑菇的笑话，不知道会让赛诺在晚餐时喝多少蘑菇汤。", isHidden: false },
+    { id: 65, character: "赛诺 (2)", version: "5.7", travelName: "②食物", location: "须弥-净甸", hiddenCondition: "", extraCharacter: "", description: "蘑菇虽然是「树食主义者」。但请不要为了验证这个说法，而去挑衅翠翎恐蕈。它可不是吃素的。", isHidden: false },
+    { id: 66, character: "赛诺 (3)", version: "5.7", travelName: "③职责", location: "须弥-寂静园", hiddenCondition: "", extraCharacter: "", description: "大风纪官，即将履行他的职责。昨日，今日，明日，每日皆如此。", isHidden: false },
+    { id: 67, character: "柯莱 (1)", version: "5.7", travelName: "学习会", location: "须弥-教令院-智慧宫", hiddenCondition: "", extraCharacter: "", description: "在提纳里的帮助下，柯莱站上讲台，主持了一场盛大的学习会。看来，她正在学习之路上稳步前行。", isHidden: false },
+    { id: 68, character: "林尼 (1)", version: "5.7", travelName: "魔术", location: "枫丹-枫丹动能工程科学研究院区", hiddenCondition: "", extraCharacter: "", description: "在枫丹科学院外，遇见了正打算去科学院做魔术交流的林尼。听起来，他对于那种「近景魔术」也很感兴趣。等等，他刚才是不是已经变过一次「近景魔术」了？", isHidden: false },
+    { id: 69, character: "那维莱特 (1)", version: "5.7", travelName: "①雨中", location: "枫丹-伊黎耶林区", hiddenCondition: "", extraCharacter: "", description: "看来，淋雨只是那维莱特的「私人爱好」。", isHidden: false },
+    { id: 70, character: "那维莱特 (2)", version: "5.7", travelName: "②礼物", location: "枫丹-枫丹廷", hiddenCondition: "", extraCharacter: "", description: "在塞德娜的建议下，那维莱特继续采购着预备送给美露莘们的礼物——每一位美露莘都有份。", isHidden: false },
+    { id: 71, character: "那维莱特 (3)", version: "5.7", travelName: "③拜访", location: "枫丹-厄里那斯", hiddenCondition: "", extraCharacter: "", description: "每一位美露莘都有的礼物，来自那维莱特。...而「鱼鱼咏唱派」，则来自美露莘。", isHidden: false },
+    { id: 72, character: "琳妮特 (1)", version: "5.7", travelName: "修理...?", location: "枫丹-枫丹廷-灰河", hiddenCondition: "", extraCharacter: "", description: "琳妮特在灰河里帮助大家不断「修复」着机器，被她碰过的机器，都安安静静地不再动弹了。或许，这也是一种...出色的能力？", isHidden: false },
+    { id: 73, character: "菲米尼 (1)", version: "5.7", travelName: "故事", location: "枫丹-塞洛海原（水下）", hiddenCondition: "", extraCharacter: "", description: "在水下，菲米尼对影像兽讲完了自己手上绘本的故事。希望，这个故事里的人和影像兽能有一个好结局。", isHidden: false },
+    { id: 74, character: "夏沃蕾 (1)", version: "5.7", travelName: "再加把劲！", location: "枫丹-枫丹廷", hiddenCondition: "", extraCharacter: "", description: "继续训练！别掉队了！在夏沃蕾的督促下，巡队队员们继续展开着艰苦的训练...", isHidden: false },
+    { id: 75, character: "夏洛特 (1)", version: "5.7", travelName: "①耐心", location: "枫丹-枫丹廷", hiddenCondition: "", extraCharacter: "", description: "夏洛特小姐最终还是没有等来她的「采访对象」。但在她的采访簿上，并不存在「气馁」这个词。很快，她就要奔向下一个地点了...", isHidden: false },
+    { id: 76, character: "夏洛特 (2)", version: "5.7", travelName: "②糟糕糟糕", location: "枫丹-枫丹廷", hiddenCondition: "", extraCharacter: "", description: "再完美的计划，也总是会因为一点小疏忽而被破坏。夏洛特想要前往纳塔的企图被主编看穿，并被阻拦了下来。但是，她很快找到了下一个目的地——挪德卡莱。", isHidden: false },
+    { id: 77, character: "夏洛特 (3)", version: "5.7", travelName: "③新目的地", location: "枫丹-枫丹廷", hiddenCondition: "", extraCharacter: "千织", description: "说服了父母后，夏洛特终于获得了前往挪德卡莱的机会。或许在那片土地上，她会发现更多「有趣的故事」。", isHidden: false },
+    { id: 78, character: "基尼奇 (1)", version: "5.7", travelName: "委托", location: "纳塔-冒险家协会", hiddenCondition: "与纳塔凯瑟琳对话后出现", extraCharacter: "", description: "在冒险家协会旁遇见了基尼奇，他似乎已经完成了手上的委托。如果有机会的话...下次挑选委托时，或许能请基尼奇过来给点意见？", isHidden: true },
+    { id: 79, character: "希诺宁 (1)", version: "5.7", travelName: "面谈实务", location: "纳塔-冒险家协会", hiddenCondition: "与纳塔凯瑟琳对话后出现", extraCharacter: "", description: "希诺宁接到了一封委托信，当她正准备以「必须面谈」的理由将信退回原处时，这次委托的「客户」玛薇卡，却已经在希诺宁的工坊里，等着和她「面谈」了。", isHidden: true },
+    { id: 80, character: "伊法 (1)", version: "5.7", travelName: "药物", location: "纳塔-合成台", hiddenCondition: "使用纳塔合成台后出现", extraCharacter: "", description: "为了治疗小龙们的厌食症，伊法来到这里想要制作一些药物带回去。这次，可不能让吐库库偷吃了。「继续吃」！哥们！", isHidden: true },
+    { id: 81, character: "伊安珊 (1)", version: "5.7", travelName: "训练问题", location: "纳塔-合成台", hiddenCondition: "使用纳塔合成台后出现", extraCharacter: "", description: "为了治疗因为训练而受伤的部族成员，伊安珊来到这里，想要制作一些药物带回去...自由器械有风险，强身重责需谨慎。", isHidden: true },
+    { id: 82, character: "菈乌玛 (1)", version: "月之一", travelName: "①聚会", location: "挪德卡莱-希汐岛-霜月之坊", hiddenCondition: "", extraCharacter: "", description: "在希汐岛，你遇见了正在休憩的菈乌玛，虽然已经很小心了，但是还是被她注意到了...不，应该是一开始就被那只小猫注意到了吧。", isHidden: false },
+    { id: 83, character: "菈乌玛 (2)", version: "月之一", travelName: "②可承之重", location: "挪德卡莱-希汐岛-霜月之坊", hiddenCondition: "", extraCharacter: "", description: "在希汐岛，你遇见了正在休憩的菈乌玛，但她好像正因为自己「角冠」的重量问题而略有苦恼...", isHidden: false },
+    { id: 84, character: "伊涅芙 (1)", version: "月之一", travelName: "①语言问题", location: "挪德卡莱-伦波岛-叮铃哐啷蛋卷工坊", hiddenCondition: "", extraCharacter: "爱诺", description: "在叮铃哐啷蛋卷工坊里，你遇见了正在给伊涅芙做整修的爱诺，据说是伊涅芙请求爱诺，帮自己提升「幽默感」。但这个提升幅度，是否有些...", isHidden: false },
+    { id: 85, character: "伊涅芙 (2)", version: "月之一", travelName: "②冥想时间", location: "挪德卡莱-伦波岛-叮铃哐啷蛋卷工坊", hiddenCondition: "", extraCharacter: "雅珂达", description: "在叮铃哐啷蛋卷工坊里，你遇见了正在「冥想」的伊涅芙，原来她在试图帮助失眠的雅珂达正常入眠。但是，伊涅芙所谓的「冥想」，真的不是「关机」吗？", isHidden: false },
+    { id: 86, character: "伊涅芙 (3)", version: "月之一", travelName: "③事关蛋卷", location: "挪德卡莱-伦波岛-叮铃哐啷蛋卷工坊", hiddenCondition: "", extraCharacter: "", description: "在那夏镇，你遇见了正在采集蛋卷原料的伊涅芙。看起来，她的幽默感已经被爱诺调低了不少...", isHidden: false },
+    { id: 87, character: "奈芙尔 (1)", version: "月之一", travelName: "①靠谱与否", location: "挪德卡莱-伦波岛-那夏镇-秘读书屋", hiddenCondition: "与书店老板对话刷出", extraCharacter: "", description: "你遇见了正在买书的奈芙尔。虽然奈芙尔所购买的书籍很不靠谱，但她似乎想要用这本书试探一下雅珂达...?", isHidden: true },
+    { id: 88, character: "奈芙尔 (2)", version: "月之一", travelName: "②贵客登门", location: "挪德卡莱-伦波岛-那夏镇-旗舰酒馆", hiddenCondition: "", extraCharacter: "夜兰", description: "在「旗舰」内，奈芙尔和夜兰正聊着「生意」。虽然两人的言语都十分礼貌，但聊天的氛围已经算是剑拔弩张了...不、不然还是先离这两位远一点吧...", isHidden: false },
+    { id: 89, character: "奈芙尔 (3)", version: "月之一", travelName: "③旧客登门", location: "挪德卡莱-伦波岛-那夏镇-秘闻馆", hiddenCondition: "", extraCharacter: "多莉", description: "在「秘闻馆」内，你遇见了似乎正在聊生意的奈芙尔与多莉，听她们的说法，多莉似乎曾经在挪德卡莱做了某些...准备？", isHidden: false },
+    { id: 90, character: "菲林斯 (1)", version: "月之一", travelName: "①力有未逮", location: "挪德卡莱-伦波岛-空寂走廊（西南方向）", hiddenCondition: "", extraCharacter: "伊涅芙", description: "你遇见了正看着伊涅芙修理路灯的菲林斯。看来，执灯士也有很多需要重新学习的东西啊...", isHidden: true },
+    { id: 91, character: "菲林斯 (2)", version: "月之一", travelName: "②巡视", location: "挪德卡莱-帕哈岛-圣遗物副本（七天神像北方）", hiddenCondition: "进入圣遗物副本（消耗体力）退出副本后刷出", extraCharacter: "", description: "你遇见了正在巡视至此的菲林斯。有这么一位可靠的人在巡逻，周围应该安全的不得了吧...应该。", isHidden: true },
+    { id: 92, character: "菲林斯 (3)", version: "月之一", travelName: "③藏品", location: "挪德卡莱-伦波岛-那夏镇-伏尼契商会（地图钻石图标）", hiddenCondition: "伏尼契商会对话后刷出", extraCharacter: "", description: "你遇见了正在购买藏品的菲林斯，虽然这块怀表不算便宜，但菲林斯似乎非常喜欢它...", isHidden: true },
+    { id: 93, character: "菲林斯 (4)", version: "月之一", travelName: "④古币", location: "挪德卡莱-伦波岛-那夏镇", hiddenCondition: "", extraCharacter: "", description: "在那夏镇，你遇见了正等着收购古币的菲林斯，他对于古币这一收藏品似乎颇有研究。不过，古币的收藏价值应该大于实际价值吧...", isHidden: false },
+    { id: 94, character: "菲林斯 (5)", version: "月之一", travelName: "⑤日常所需", location: "挪德卡莱-帕哈岛-终夜长茔", hiddenCondition: "", extraCharacter: "", description: "你遇见了正在整理屋子的菲林斯，也听他讲起了自己的「高效」的进食方式。但是，听起来菲林斯对肉脯和饼干的味道依然印象深刻...", isHidden: false },
+    { id: 95, character: "菲林斯 (6)", version: "月之一", travelName: "⑥意外助手", location: "挪德卡莱-帕哈岛-终夜长茔", hiddenCondition: "", extraCharacter: "", description: "你遇见了正在制作骨拼图的菲林斯，而且，他似乎有一只不知名的狗狗助手...", isHidden: false },
+    { id: 96, character: "雅珂达 (1)", version: "月之一", travelName: "①对应酬劳", location: "挪德卡莱-伦波岛-那夏镇-冒险家协会", hiddenCondition: "与凯瑟琳对话后刷出", extraCharacter: "", description: "在冒险家协会旁，你遇见了气冲冲的雅珂达。听起来，她执行委托的过程似乎并不顺利...", isHidden: true },
+    { id: 97, character: "雅珂达 (2)", version: "月之一", travelName: "②猫！喂！猫——", location: "挪德卡莱-帕哈岛-圣遗物副本（七天神像北方）", hiddenCondition: "进入圣遗物副本（消耗体力）退出副本后刷出", extraCharacter: "", description: "在郊外，你遇见了正在寻找猫的雅珂达。她似乎被那一只乱跑的猫要得团团转。无论如何，祝你好运，雅珂达。", isHidden: true },
+    { id: 98, character: "雅珂达 (3)", version: "月之一", travelName: "③对不起嘛！伊涅芙——", location: "挪德卡莱-伦波岛-叮铃哐啷蛋卷工坊", hiddenCondition: "", extraCharacter: "伊涅芙、爱诺", description: "在叮铃哐啷蛋卷工坊里，你遇见了前来拜访，心里也在努力思考如何向伊涅芙道歉的雅珂达。虽然此事过程有波折，但所幸，雅珂达和伊涅芙的友谊似乎未曾受到影响...", isHidden: false },
+    { id: 99, character: "爱诺 (1)", version: "月之一", travelName: "①救治", location: "挪德卡莱-伦波岛-叮铃哐啷蛋卷工坊", hiddenCondition: "", extraCharacter: "伊涅芙", description: "在叮铃哐啷蛋卷工坊里，你遇见了正在照顾一只小鹿的爱诺与伊涅芙。爱诺很喜欢小鹿，但...将它送归自然，或许是更好的选择。", isHidden: false },
+    { id: 100, character: "爱诺 (2)", version: "月之一", travelName: "②选择…", location: "挪德卡莱-伦波岛-叮铃哐啷蛋卷工坊", hiddenCondition: "", extraCharacter: "伊涅芙", description: "将小鹿送归自然，或许是一个更好的选择，但是...", isHidden: false },
+    { id: 101, character: "爱诺 (3)", version: "月之一", travelName: "③时间足够你道别", location: "挪德卡莱-伦波岛-叮铃哐啷蛋卷工坊", hiddenCondition: "", extraCharacter: "伊涅芙、菈乌玛", description: "即使万分不舍，但爱诺依然决定将小鹿送归自然，菈乌玛会帮助小鹿寻找到它的家人。在小鹿真正离开之前，时间或许足够道别...", isHidden: false },
+    { id: 102, character: "爱诺 (4)", version: "月之一", travelName: "④猫，可爱！", location: "挪德卡莱-伦波岛-叮铃哐啷蛋卷工坊", hiddenCondition: "", extraCharacter: "伊涅芙", description: "在叮铃哐啷蛋卷工坊里，你遇见了打算给伊涅芙做一身猫猫服装的爱诺，在短暂——而且非常严谨——的思考后，她决定给菈乌玛也做一套。", isHidden: false },
+    { id: 103, character: "爱诺 (5)", version: "月之一", travelName: "⑤运转吧，伊涅芙", location: "挪德卡莱-伦波岛-那夏镇-合成台", hiddenCondition: "使用合成台后刷出", extraCharacter: "伊涅芙", description: "你遇见了正在为伊涅芙制作新型润滑剂的爱诺，不知道，这种润滑剂到底能不能发挥作用...", isHidden: true },
+    { id: 104, character: "丝柯克 (1)", version: "月之一", travelName: "日常所需", location: "挪德卡莱-伦波岛-那夏镇", hiddenCondition: "", extraCharacter: "多莉", description: "在那夏镇，你遇见了...丝柯克？好吧，看来她只是来找多莉要一些杂物，以获取日常所需的摩拉。不知道，下次会在哪里遇见她...", isHidden: false },
+    { id: 105, character: "米卡 (1)", version: "月之一", travelName: "为信而来", location: "挪德卡莱-伦波岛-那夏镇", hiddenCondition: "", extraCharacter: "", description: "在挪德卡莱，你遇见了米卡。他准备把骑士团的信件送给法尔伽。不过，他到底是怎么带上这么多礼物的，难道这就是西风骑士的实力么？", isHidden: false },
+    { id: 106, character: "辛焱 (1)", version: "月之一", travelName: "新演出", location: "挪德卡莱-伦波岛-那夏镇-旗舰酒馆", hiddenCondition: "", extraCharacter: "", description: "在那夏镇，你遇见了辛焱。她似乎在这里找到了新的灵感，或许，她之后会在那夏镇举办一场盛大的演出..?", isHidden: false },
+    { id: 107, character: "烟绯 (1)", version: "月之一", travelName: "①学术所致", location: "挪德卡莱-伦波岛-那夏镇", hiddenCondition: "", extraCharacter: "", description: "在挪德卡莱，你遇见了烟绯。这位律法咨询师似乎正在为了研究学术而取材。不过，她到底想在这片「无法之地」里取得何种材料？这种材料又能怎样帮助她研究律法问题呢？", isHidden: false },
+    { id: 108, character: "烟绯 (2)", version: "月之一", travelName: "②噢，角…", location: "挪德卡莱-希汐岛-霜月之坊", hiddenCondition: "", extraCharacter: "菈乌玛", description: "在希汐岛，你遇见了烟绯。她似乎已经将自己的仙人血脉之事告诉了菈乌玛，而菈乌玛也...似乎很平静地接受了这个事实，并且允许了烟绯去「霜月之坊」的书库查阅资料...好吧，看来一切都很顺利。", isHidden: false }
+];
+
+// 月之一版本新增数据
+const newVersionData = [
+    { character: "菈乌玛", travelName: "①[聚会]<br>②[可承之重]", location: "挪德卡莱 - 希汐岛 - 霜月之坊", hiddenCondition: "", extraCharacter: "" },
+    { character: "雅珂达", travelName: "*①[对应酬劳]*<br>*②[喵！喂！猫——]*<br>③[对不赊啊！伊涅芙——]", location: "挪德卡莱 - 伦波岛 - 那夏镇 - 冒险家协会<br>挪德卡莱 - 帕哈岛 - 圣遗物副本（七天神像北方向）<br>挪德卡莱 - 伦波岛 - 叮铃眶啷蛋卷工坊", hiddenCondition: "与凯瑟琳对话后刷出<br>进入圣遗物副本后（消耗体力）退出副本来刷出<br>", extraCharacter: "" },
+    { character: "菲林斯", travelName: "①[力有未逮]<br>*②[巡视]*<br>*③[藏品]*<br>④[古市]<br>⑤[日常所需]<br>⑥[意外助手]", location: "挪德卡莱 - 伦波岛 - 空寂走廊（西南方向）<br>挪德卡莱 - 帕哈岛 - 圣遗物副本（七天神像北方向）<br>挪德卡莱 - 伦波岛 - 邦夏镇 - 伏尼契商会（地图钻石图标）<br>挪德卡莱 - 伦波岛 - 那夏镇<br>挪德卡莱 - 帕哈岛 - 终夜长茔<br>挪德卡莱 - 帕哈岛 - 终夜长茔", hiddenCondition: "进入圣遗物副本后（消耗体力）退出副本来刷出<br>伏尼契商会对话后刷出<br>", extraCharacter: "伊涅芙<br>伊涅芙<br>" },
+    { character: "爱诺", travelName: "①[救治]<br>②[选择…]<br>③[时间足够你遣别]<br>④[喵，可爱]<br>*⑤[运转吧，伊涅芙]*", location: "挪德卡莱 - 伦波岛 - 叮铃眶啷蛋卷工坊<br>挪德卡莱 - 伦波岛 - 叮铃哐啷蛋卷工坊<br>挪德卡莱 - 伦波岛 - 叮铃哐啷蛋卷工坊<br>挪德卡莱 - 伦波岛 - 叮铃哐啷蛋卷工坊<br>挪德卡莱 - 伦波岛 - 那夏镇 - 合成台", hiddenCondition: "使用合成台后刷出<br>使用合成台后刷出<br>使用合成台后刷出<br>使用合成台后刷出<br>与凯瑟琳对话后刷出", extraCharacter: "伊涅芙<br>伊涅芙<br>伊涅芙、菈乌玛<br>伊涅芙<br>伊涅芙" },
+    { character: "奈芙尔", travelName: "*①[靠谱与否]*", location: "挪德卡莱 - 伦波岛 - 邦夏镇 - 秘法书屋", hiddenCondition: "与书店老板对话后刷出", extraCharacter: "夜兰" },
+    { character: "奈芙尔", travelName: "②[贵客登门]", location: "挪德卡莱 - 伦波岛 - 邦夏镇 - 旗舰酒馆", hiddenCondition: "", extraCharacter: "" },
+    { character: "景奈尔", travelName: "③[旧客登门]", location: "挪德卡莱 - 伦波岛 - 邦夏镇 - 秘闻馆", hiddenCondition: "", extraCharacter: "多莉" },
+    { character: "伊涅芙", travelName: "①[语言问题]", location: "挪德卡莱 - 伦波岛 - 叮铃眶啷蛋卷工坊", hiddenCondition: "", extraCharacter: "" },
+    { character: "伊涅芙", travelName: "②[冥想时间]", location: "挪德卡莱 - 伦波岛 - 叮铃眶啷蛋卷工坊", hiddenCondition: "", extraCharacter: "雅珂达" },
+    { character: "伊涅芙", travelName: "③[事关蛋卷]", location: "挪德卡莱 - 伦波岛 - 叮铃眶啷蛋卷工坊", hiddenCondition: "", extraCharacter: "雅珂达" },
+    { character: "鹿野院平藏", travelName: "[他人之罪]", location: "挪德卡莱 - 伦波岛 - 邦夏镇 - 旗舰酒馆", hiddenCondition: "", extraCharacter: "雅珂达" },
+    { character: "米卡", travelName: "[为信而来]", location: "挪德卡莱 - 伦波岛 - 邦夏镇", hiddenCondition: "", extraCharacter: "" },
+    { character: "烟绯", travelName: "①[学术所致]", location: "挪德卡莱 - 伦波岛 - 那夏镇", hiddenCondition: "", extraCharacter: "" },
+    { character: "烟绯", travelName: "②[嗅,角]", location: "挪德卡莱 - 希汐岛 - 霜月之坊", hiddenCondition: "", extraCharacter: "菈乌玛" },
+    { character: "丝柯克", travelName: "[日常所需]", location: "挪德卡莱 - 伦波岛 - 那夏镇", hiddenCondition: "", extraCharacter: "多莉" },
+    { character: "辛焱", travelName: "[新演出]", location: "挪德卡莱 - 伦波岛 - 那夏镇 - 旗舰酒馆", hiddenCondition: "", extraCharacter: "" }
+];
+
+// DOM 加载完成后执行
+document.addEventListener('DOMContentLoaded', function() {
+    // 渲染初始视图
+    renderView();
+    
+    // 添加事件监听器
+    addEventListeners();
+    
+    // 初始化回到顶部按钮
+    initScrollTopButton();
+    
+    // 添加窗口大小变化监听器，实现响应式切换
+    window.addEventListener('resize', renderView);
+});
+
+// 根据设备宽度渲染对应视图
+function renderView() {
+    const isMobile = window.innerWidth <= 768;
+    
+    // 为主要内容区域创建或更新视图
+    if (isMobile) {
+        renderCards();
+        renderNewVersionCards();
+    } else {
+        renderTable();
+        renderNewVersionTable();
+    }
+}
+
+// 渲染主表格
+function renderTable(filteredData = null) {
+    const tableBody = document.getElementById('table-body');
+    tableBody.innerHTML = '';
+    
+    const data = filteredData || characterData;
+    
+    data.forEach(item => {
+        const row = document.createElement('tr');
+        
+        // 根据地区添加对应的样式类
+        let regionClass = '';
+        if (item.location.includes('蒙德')) regionClass = 'region-mondstadt';
+        else if (item.location.includes('璃月')) regionClass = 'region-liyue';
+        else if (item.location.includes('稻妻')) regionClass = 'region-inazuma';
+        else if (item.location.includes('须弥')) regionClass = 'region-sumeru';
+        else if (item.location.includes('枫丹')) regionClass = 'region-fontaine';
+        else if (item.location.includes('纳塔')) regionClass = 'region-natlan';
+        else if (item.location.includes('挪德')) regionClass = 'region-nordkala';
+        
+        row.className = regionClass;
+        
+        // 总计数
+        const idCell = document.createElement('td');
+        idCell.textContent = item.id;
+        row.appendChild(idCell);
+        
+        // 角色
+        const characterCell = document.createElement('td');
+        characterCell.textContent = item.character;
+        row.appendChild(characterCell);
+        
+        // 版本
+        const versionCell = document.createElement('td');
+        versionCell.textContent = item.version;
+        row.appendChild(versionCell);
+        
+        // 游逸旅闻
+        const travelCell = document.createElement('td');
+        const travelSpan = document.createElement('span');
+        travelSpan.textContent = item.travelName;
+        if (item.isHidden) {
+            travelSpan.className = 'hidden-travel';
+        }
+        travelCell.appendChild(travelSpan);
+        row.appendChild(travelCell);
+        
+        // 地点
+        const locationCell = document.createElement('td');
+        locationCell.textContent = item.location;
+        row.appendChild(locationCell);
+        
+        // 隐藏触发条件
+        const conditionCell = document.createElement('td');
+        conditionCell.textContent = item.hiddenCondition || '-';
+        row.appendChild(conditionCell);
+        
+        // 额外出场角色
+        const extraCell = document.createElement('td');
+        extraCell.textContent = item.extraCharacter || '-';
+        row.appendChild(extraCell);
+        
+        // 描述
+        const descCell = document.createElement('td');
+        descCell.textContent = item.description;
+        row.appendChild(descCell);
+        
+        tableBody.appendChild(row);
+    });
+}
+
+// 渲染主表格的卡片视图
+function renderCards(filteredData = null) {
+    const tableContainer = document.querySelector('.table-container');
+    
+    // 检查是否已有卡片容器，如果没有则创建
+    let cardContainer = document.querySelector('.card-container');
+    if (!cardContainer) {
+        cardContainer = document.createElement('div');
+        cardContainer.className = 'card-container';
+        tableContainer.appendChild(cardContainer);
+    } else {
+        cardContainer.innerHTML = '';
+    }
+    
+    const data = filteredData || characterData;
+    
+    data.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'character-card';
+        
+        // 根据地区添加对应的样式类
+        if (item.location.includes('蒙德')) card.classList.add('card-mondstadt');
+        else if (item.location.includes('璃月')) card.classList.add('card-liyue');
+        else if (item.location.includes('稻妻')) card.classList.add('card-inazuma');
+        else if (item.location.includes('须弥')) card.classList.add('card-sumeru');
+        else if (item.location.includes('枫丹')) card.classList.add('card-fontaine');
+        else if (item.location.includes('纳塔')) card.classList.add('card-natlan');
+        else if (item.location.includes('挪德')) card.classList.add('card-nordkala');
+        
+        // 卡片标题
+        const header = document.createElement('div');
+        header.className = 'card-header';
+        
+        const characterName = document.createElement('div');
+        characterName.className = 'card-character';
+        characterName.textContent = item.character;
+        
+        const versionTag = document.createElement('div');
+        versionTag.className = 'card-version';
+        versionTag.textContent = item.version;
+        
+        header.appendChild(characterName);
+        header.appendChild(versionTag);
+        
+        // 卡片内容
+        const content = document.createElement('div');
+        content.className = 'card-content';
+        
+        // 游逸旅闻
+        const travelItem = document.createElement('div');
+        travelItem.className = 'card-item';
+        
+        const travelLabel = document.createElement('span');
+        travelLabel.className = 'card-label';
+        travelLabel.textContent = '游逸旅闻：';
+        
+        const travelValue = document.createElement('span');
+        travelValue.className = 'card-value';
+        if (item.isHidden) travelValue.classList.add('hidden-travel');
+        travelValue.textContent = item.travelName;
+        
+        travelItem.appendChild(travelLabel);
+        travelItem.appendChild(travelValue);
+        
+        // 地点
+        const locationItem = document.createElement('div');
+        locationItem.className = 'card-item';
+        
+        const locationLabel = document.createElement('span');
+        locationLabel.className = 'card-label';
+        locationLabel.textContent = '地点：';
+        
+        const locationValue = document.createElement('span');
+        locationValue.className = 'card-value';
+        locationValue.textContent = item.location;
+        
+        locationItem.appendChild(locationLabel);
+        locationItem.appendChild(locationValue);
+        
+        // 隐藏触发条件
+        const conditionItem = document.createElement('div');
+        conditionItem.className = 'card-item';
+        
+        const conditionLabel = document.createElement('span');
+        conditionLabel.className = 'card-label';
+        conditionLabel.textContent = '隐藏触发条件：';
+        
+        const conditionValue = document.createElement('span');
+        conditionValue.className = 'card-value';
+        conditionValue.textContent = item.hiddenCondition || '-';
+        
+        conditionItem.appendChild(conditionLabel);
+        conditionItem.appendChild(conditionValue);
+        
+        // 额外出场角色
+        const extraItem = document.createElement('div');
+        extraItem.className = 'card-item';
+        
+        const extraLabel = document.createElement('span');
+        extraLabel.className = 'card-label';
+        extraLabel.textContent = '额外出场角色：';
+        
+        const extraValue = document.createElement('span');
+        extraValue.className = 'card-value';
+        extraValue.textContent = item.extraCharacter || '-';
+        
+        extraItem.appendChild(extraLabel);
+        extraItem.appendChild(extraValue);
+        
+        // 描述
+        const descItem = document.createElement('div');
+        descItem.className = 'card-item';
+        
+        const descLabel = document.createElement('span');
+        descLabel.className = 'card-label';
+        descLabel.textContent = '描述：';
+        
+        const descValue = document.createElement('span');
+        descValue.className = 'card-value';
+        descValue.textContent = item.description;
+        
+        descItem.appendChild(descLabel);
+        descItem.appendChild(descValue);
+        
+        // 组合卡片内容
+        content.appendChild(travelItem);
+        content.appendChild(locationItem);
+        content.appendChild(conditionItem);
+        content.appendChild(extraItem);
+        content.appendChild(descItem);
+        
+        // 组合卡片
+        card.appendChild(header);
+        card.appendChild(content);
+        
+        cardContainer.appendChild(card);
+    });
+}
+
+// 渲染月之一版本新增表格
+function renderNewVersionTable() {
+    const tableBody = document.getElementById('new-version-body');
+    tableBody.innerHTML = '';
+    
+    newVersionData.forEach(item => {
+        const row = document.createElement('tr');
+        row.className = 'region-nordkala';
+        
+        // 角色
+        const characterCell = document.createElement('td');
+        characterCell.textContent = item.character;
+        row.appendChild(characterCell);
+        
+        // 游逸旅闻
+        const travelCell = document.createElement('td');
+        travelCell.innerHTML = item.travelName;
+        row.appendChild(travelCell);
+        
+        // 地点
+        const locationCell = document.createElement('td');
+        locationCell.innerHTML = item.location;
+        row.appendChild(locationCell);
+        
+        // 隐藏触发条件
+        const conditionCell = document.createElement('td');
+        conditionCell.innerHTML = item.hiddenCondition || '-';
+        row.appendChild(conditionCell);
+        
+        // 额外出场角色
+        const extraCell = document.createElement('td');
+        extraCell.innerHTML = item.extraCharacter || '-';
+        row.appendChild(extraCell);
+        
+        tableBody.appendChild(row);
+    });
+}
+
+// 渲染月之一版本的卡片视图
+function renderNewVersionCards() {
+    const newVersionTableContainer = document.querySelector('.new-version-section .table-container');
+    
+    // 检查是否已有卡片容器，如果没有则创建
+    let cardContainer = document.querySelector('.new-version-section .card-container');
+    if (!cardContainer) {
+        cardContainer = document.createElement('div');
+        cardContainer.className = 'card-container';
+        newVersionTableContainer.appendChild(cardContainer);
+    } else {
+        cardContainer.innerHTML = '';
+    }
+    
+    newVersionData.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'character-card card-nordkala';
+        
+        // 卡片标题
+        const header = document.createElement('div');
+        header.className = 'card-header';
+        
+        const characterName = document.createElement('div');
+        characterName.className = 'card-character';
+        characterName.textContent = item.character;
+        
+        const versionTag = document.createElement('div');
+        versionTag.className = 'card-version';
+        versionTag.textContent = '月之一';
+        
+        header.appendChild(characterName);
+        header.appendChild(versionTag);
+        
+        // 卡片内容
+        const content = document.createElement('div');
+        content.className = 'card-content';
+        
+        // 游逸旅闻
+        const travelItem = document.createElement('div');
+        travelItem.className = 'card-item';
+        
+        const travelLabel = document.createElement('span');
+        travelLabel.className = 'card-label';
+        travelLabel.textContent = '游逸旅闻：';
+        
+        const travelValue = document.createElement('span');
+        travelValue.className = 'card-value';
+        travelValue.innerHTML = item.travelName;
+        
+        travelItem.appendChild(travelLabel);
+        travelItem.appendChild(travelValue);
+        
+        // 地点
+        const locationItem = document.createElement('div');
+        locationItem.className = 'card-item';
+        
+        const locationLabel = document.createElement('span');
+        locationLabel.className = 'card-label';
+        locationLabel.textContent = '地点：';
+        
+        const locationValue = document.createElement('span');
+        locationValue.className = 'card-value';
+        locationValue.innerHTML = item.location;
+        
+        locationItem.appendChild(locationLabel);
+        locationItem.appendChild(locationValue);
+        
+        // 隐藏触发条件
+        const conditionItem = document.createElement('div');
+        conditionItem.className = 'card-item';
+        
+        const conditionLabel = document.createElement('span');
+        conditionLabel.className = 'card-label';
+        conditionLabel.textContent = '隐藏触发条件：';
+        
+        const conditionValue = document.createElement('span');
+        conditionValue.className = 'card-value';
+        conditionValue.innerHTML = item.hiddenCondition || '-';
+        
+        conditionItem.appendChild(conditionLabel);
+        conditionItem.appendChild(conditionValue);
+        
+        // 额外出场角色
+        const extraItem = document.createElement('div');
+        extraItem.className = 'card-item';
+        
+        const extraLabel = document.createElement('span');
+        extraLabel.className = 'card-label';
+        extraLabel.textContent = '额外出场角色：';
+        
+        const extraValue = document.createElement('span');
+        extraValue.className = 'card-value';
+        extraValue.innerHTML = item.extraCharacter || '-';
+        
+        extraItem.appendChild(extraLabel);
+        extraItem.appendChild(extraValue);
+        
+        // 组合卡片内容
+        content.appendChild(travelItem);
+        content.appendChild(locationItem);
+        content.appendChild(conditionItem);
+        content.appendChild(extraItem);
+        
+        // 组合卡片
+        card.appendChild(header);
+        card.appendChild(content);
+        
+        cardContainer.appendChild(card);
+    });
+}
+
+// 添加事件监听器
+function addEventListeners() {
+    const regionFilter = document.getElementById('region-filter');
+    const versionFilter = document.getElementById('version-filter');
+    const searchInput = document.getElementById('search-input');
+    const clearButton = document.getElementById('clear-filter');
+    
+    // 地区筛选
+    regionFilter.addEventListener('change', applyFilters);
+    
+    // 版本筛选
+    versionFilter.addEventListener('change', applyFilters);
+    
+    // 搜索输入
+    searchInput.addEventListener('input', applyFilters);
+    
+    // 清除筛选
+    clearButton.addEventListener('click', function() {
+        regionFilter.value = 'all';
+        versionFilter.value = 'all';
+        searchInput.value = '';
+        renderTable();
+    });
+}
+
+// 应用筛选条件
+function applyFilters() {
+    const regionFilter = document.getElementById('region-filter').value;
+    const versionFilter = document.getElementById('version-filter').value;
+    const searchTerm = document.getElementById('search-input').value.toLowerCase();
+    
+    const filteredData = characterData.filter(item => {
+        // 地区筛选
+        const regionMatch = regionFilter === 'all' || item.location.includes(regionFilter);
+        
+        // 版本筛选
+        const versionMatch = versionFilter === 'all' || item.version === versionFilter;
+        
+        // 搜索筛选
+        const searchMatch = searchTerm === '' || 
+                           item.character.toLowerCase().includes(searchTerm) ||
+                           item.travelName.toLowerCase().includes(searchTerm) ||
+                           item.description.toLowerCase().includes(searchTerm);
+        
+        return regionMatch && versionMatch && searchMatch;
+    });
+    
+    renderTable(filteredData);
+}
+
+// 初始化回到顶部按钮
+function initScrollTopButton() {
+    const scrollTopButton = document.querySelector('.scroll-top');
+    
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            scrollTopButton.classList.add('visible');
+        } else {
+            scrollTopButton.classList.remove('visible');
+        }
+    });
+    
+    scrollTopButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// 根据屏幕宽度渲染不同的视图
+function renderView(filteredData = null) {
+    const isMobile = window.innerWidth <= 768;
+    const hasFilteredData = filteredData !== null && filteredData !== undefined;
+    
+    // 处理主要内容区域
+    if (isMobile) {
+        // 移动端视图：隐藏表格，显示卡片
+        const table = document.querySelector('table');
+        if (table) table.style.display = 'none';
+        
+        const cardContainer = document.querySelector('.card-container');
+        if (cardContainer) {
+            cardContainer.style.display = 'grid';
+        }
+        
+        if (hasFilteredData) {
+            renderCards(filteredData);
+        } else {
+            renderCards();
+        }
+    } else {
+        // 桌面端视图：隐藏卡片，显示表格
+        const cardContainer = document.querySelector('.card-container');
+        if (cardContainer) {
+            cardContainer.style.display = 'none';
+        }
+        
+        const table = document.querySelector('table');
+        if (table) table.style.display = 'table';
+        
+        if (hasFilteredData) {
+            renderTable(filteredData);
+        } else {
+            renderTable();
+        }
+    }
+    
+    // 处理月之一版本部分
+    if (isMobile) {
+        const newVersionTable = document.querySelector('.new-version-section table');
+        if (newVersionTable) newVersionTable.style.display = 'none';
+        
+        const newVersionCardContainer = document.querySelector('.new-version-section .card-container');
+        if (newVersionCardContainer) {
+            newVersionCardContainer.style.display = 'grid';
+        }
+        
+        renderNewVersionCards();
+    } else {
+        const newVersionCardContainer = document.querySelector('.new-version-section .card-container');
+        if (newVersionCardContainer) {
+            newVersionCardContainer.style.display = 'none';
+        }
+        
+        const newVersionTable = document.querySelector('.new-version-section table');
+        if (newVersionTable) newVersionTable.style.display = 'table';
+        
+        renderNewVersionTable();
+    }
+}
+
+// 修改applyFilters函数以支持响应式视图
+function applyFilters() {
+    const regionFilter = document.getElementById('region-filter').value;
+    const versionFilter = document.getElementById('version-filter').value;
+    const searchTerm = document.getElementById('search-input').value.toLowerCase();
+    
+    const filteredData = characterData.filter(item => {
+        // 地区筛选
+        const regionMatch = regionFilter === 'all' || item.location.includes(regionFilter);
+        
+        // 版本筛选
+        const versionMatch = versionFilter === 'all' || item.version === versionFilter;
+        
+        // 搜索筛选
+        const searchMatch = searchTerm === '' || 
+                           item.character.toLowerCase().includes(searchTerm) ||
+                           item.travelName.toLowerCase().includes(searchTerm) ||
+                           item.description.toLowerCase().includes(searchTerm);
+        
+        return regionMatch && versionMatch && searchMatch;
+    });
+    
+    // 使用renderView代替renderTable，以支持响应式视图
+    renderView(filteredData);
+}
+
+// DOMContentLoaded事件监听器
+document.addEventListener('DOMContentLoaded', function() {
+    // 初始化视图
+    renderView();
+    
+    // 添加事件监听器
+    addEventListeners();
+    
+    // 初始化回到顶部按钮
+    initScrollTopButton();
+    
+    // 窗口大小变化时重新渲染视图
+    window.addEventListener('resize', function() {
+        renderView();
+    });
+});
