@@ -383,6 +383,9 @@ function renderCards(filteredData = null) {
     });
 }
 
+// 引入自定义select初始化函数
+import { initCustomSelectDisplay } from './components/select.js';
+
 // 添加事件监听器
 function addEventListeners() {
     const regionFilter = document.getElementById('region-filter');
@@ -411,6 +414,11 @@ function addEventListeners() {
         versionFilter.value = 'all';
         searchInput.value = '';
         showCompletedCheckbox.checked = false;
+        
+        // 更新自定义select的UI显示
+        initCustomSelectDisplay(regionFilter);
+        initCustomSelectDisplay(versionFilter);
+        
         renderTable();
     });
 }
