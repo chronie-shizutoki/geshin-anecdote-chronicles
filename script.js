@@ -63,6 +63,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // 为导出/导入按钮添加事件监听器
     document.getElementById('export-data')?.addEventListener('click', exportData);
     document.getElementById('import-data')?.addEventListener('change', importData);
+    
+    // 初始化未完成任务数量显示
+    updateIncompleteCount();
 });
 
 // 本地存储相关函数
@@ -70,11 +73,14 @@ function getCompletedTasks() {
     const stored = localStorage.getItem('completedTasks');
     return stored ? JSON.parse(stored) : {};
 }
-
+// 保存已完成任务
 function saveCompletedTask(taskId, isCompleted) {
     const completedTasks = getCompletedTasks();
     completedTasks[taskId] = isCompleted;
     localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
+    
+    // 更新未完成任务数量显示
+    updateIncompleteCount();
 }
 
 // 根据设备宽度渲染对应视图
@@ -118,6 +124,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// 计算未完成任务数量并更新显示
+function updateIncompleteCount() {
+    const completedTasks = getCompletedTasks();
+    const incompleteCount = characterData.filter(item => !completedTasks[item.id]).length;
+    const incompleteCountElement = document.getElementById('incomplete-count');
+    if (incompleteCountElement) {
+        incompleteCountElement.textContent = incompleteCount;
+    }
+}
+
 // 渲染主表格
 function renderTable(filteredData = null) {
     const tableBody = document.getElementById('table-body');
@@ -127,6 +143,8 @@ function renderTable(filteredData = null) {
     const completedTasks = getCompletedTasks();
     const showOnlyIncomplete = document.getElementById('show-completed')?.checked || false;
     
+    // 更新未完成任务数量显示
+    updateIncompleteCount();    
     data.forEach(item => {
         // 应用仅显示未完成的筛选
         if (showOnlyIncomplete && completedTasks[item.id]) {
@@ -240,6 +258,8 @@ function renderCards(filteredData = null) {
     const completedTasks = getCompletedTasks();
     const showOnlyIncomplete = document.getElementById('show-completed')?.checked || false;
     
+    // 更新未完成任务数量显示
+    updateIncompleteCount();    
     data.forEach(item => {
         // 应用仅显示未完成的筛选
         if (showOnlyIncomplete && completedTasks[item.id]) {
