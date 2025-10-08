@@ -15,6 +15,26 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* 复选框样式 - 浅色模式 */
+input[type="checkbox"] {
+    accent-color: #a86c4c;
+    background-color: #f7f0e6;
+    border: 1px solid #d1b78e;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #a86c4c;
+}
+
+/* 特定复选框样式 - 浅色模式 */
+#show-completed,
+.task-checkbox {
+    accent-color: #a86c4c;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
 /* 回到顶部按钮 */
 .scroll-top {
     position: fixed;
