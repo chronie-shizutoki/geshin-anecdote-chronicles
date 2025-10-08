@@ -12,6 +12,7 @@ body {
     line-height: 1.6;
     background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 50 C60 40, 70 40, 80 50 C90 60, 90 70, 80 80 C70 90, 60 90, 50 80 C40 90, 30 90, 20 80 C10 70, 10 60, 20 50 C30 40, 40 40, 50 50' fill='none' stroke='%23d1b78e' stroke-width='0.5' opacity='0.3'/%3E%3C/svg%3E");
     background-attachment: fixed;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* 回到顶部按钮 */
@@ -118,6 +119,7 @@ body {
     color: #8c543a;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     letter-spacing: 2px;
+    transition: color 0.3s ease;
 }
 
 /* 主要内容区域 */
@@ -133,6 +135,7 @@ body {
     border-radius: 8px;
     border: 1px solid #d1b78e;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .notice-section h2 {
@@ -142,12 +145,14 @@ body {
     font-size: 1.8rem;
     border-bottom: 2px solid #d1b78e;
     padding-bottom: 10px;
+    transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .notice-box {
     background-color: rgba(247, 240, 230, 0.8);
     border-radius: 6px;
     padding: 20px;
+    transition: background-color 0.3s ease;
 }
 
 .notice-list {
@@ -178,6 +183,7 @@ body {
     border-radius: 8px;
     border: 1px solid #d1b78e;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .filter-controls {
@@ -197,6 +203,7 @@ body {
 .filter-group label {
     color: #8c543a;
     font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 .filter-group select,
@@ -206,6 +213,7 @@ body {
     border-radius: 4px;
     background-color: #f7f0e6;
     color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .btn {
@@ -215,7 +223,7 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn:hover {
@@ -230,6 +238,7 @@ body {
     border-radius: 8px;
     border: 1px solid #d1b78e;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .table-section h2 {
@@ -239,6 +248,7 @@ body {
     font-size: 1.8rem;
     border-bottom: 2px solid #d1b78e;
     padding-bottom: 10px;
+    transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .table-container {
@@ -249,6 +259,7 @@ body {
     width: 100%;
     border-collapse: collapse;
     background-color: rgba(255, 255, 255, 0.5);
+    transition: background-color 0.3s ease;
 }
 
 .character-table th,
@@ -256,6 +267,7 @@ body {
     padding: 12px;
     text-align: left;
     border: 1px solid #d1b78e;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .character-table th {
@@ -265,6 +277,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .character-table tr:nth-child(even) {
@@ -284,6 +297,7 @@ body {
 .hidden-travel {
     font-style: italic;
     color: #8c543a;
+    transition: color 0.3s ease;
 }
 
 /* 区域高亮 */
@@ -351,6 +365,7 @@ body {
     margin-top: 40px;
     color: #8c543a;
     border-top: 1px solid #d1b78e;
+    transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .footer-content p {
@@ -401,6 +416,7 @@ body {
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         position: relative;
         overflow: hidden;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
     }
     
     /* 卡片装饰 */
@@ -435,6 +451,7 @@ body {
         font-size: 1.2rem;
         font-weight: bold;
         color: #8c543a;
+        transition: color 0.3s ease;
     }
     
     .card-version {
@@ -443,6 +460,7 @@ body {
         padding: 4px 8px;
         border-radius: 4px;
         font-size: 0.8rem;
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
     
     /* 卡片内容 */
@@ -457,6 +475,7 @@ body {
     .card-value {
         font-size: 0.9rem;
         color: #333;
+        transition: color 0.3s ease;
     }
     
     /* 隐藏的游逸旅闻 */
@@ -478,11 +497,13 @@ body {
         padding: 8px;
         border-radius: 4px;
         font-size: 0.85rem;
+        transition: background-color 0.3s ease;
     }
     
     .condition-item strong,
     .extra-item strong {
         color: #8c543a;
+        transition: color 0.3s ease;
     }
     
     /* 描述文本样式 */
@@ -524,7 +545,7 @@ body {
         cursor: pointer;
         display: inline-block;
         vertical-align: middle;
-        transition: background-color 0.2s;
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
     
     .show-more-btn:hover {
@@ -556,6 +577,7 @@ body {
     max-width: 600px;
     border-radius: 8px;
     font-family: 'LXGWNeoZhiSongPlus', serif;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .close {
@@ -563,6 +585,7 @@ body {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 .close:hover,

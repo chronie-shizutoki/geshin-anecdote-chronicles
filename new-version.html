@@ -6,6 +6,7 @@
     <title>月之一版本新增（挪德卡莱地区）</title>
     <link rel="stylesheet" href="font/font.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dark.css">
     <script src="font/font.js" type="module" defer></script>
     <style>
         * {
@@ -19,6 +20,7 @@
             color: #333;
             background-color: #f5f5f5;
             padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
         }
         
         .container {
@@ -28,6 +30,7 @@
             border-radius: 8px;
             padding: 30px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
         }
         
         h1 {
@@ -35,12 +38,14 @@
             color: #333;
             margin-bottom: 30px;
             font-size: 2rem;
+            transition: color 0.3s;
         }
         
         h2 {
             color: #333;
             margin: 20px 0;
             font-size: 1.5rem;
+            transition: color 0.3s;
         }
         
         .table-container {
@@ -57,6 +62,7 @@
         th, td {
             padding: 12px 15px;
             border: 1px solid #ddd;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
         
         th {
@@ -76,6 +82,46 @@
         em {
             color: #666;
             font-style: italic;
+            transition: color 0.3s;
+        }
+
+        /* 深色模式样式 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                color: #f5f5f5;
+                background-color: #1a1a1a;
+            }
+            
+            .container {
+                background-color: #2d2d2d;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            }
+            
+            h1, h2 {
+                color: #f5f5f5;
+            }
+            
+            th, td {
+                border: 1px solid #444;
+                color: #f5f5f5;
+            }
+            
+            th {
+                background-color: #333;
+                color: #f5f5f5;
+            }
+            
+            tr:nth-child(even) {
+                background-color: #3a3a3a;
+            }
+            
+            tr:hover {
+                background-color: #444;
+            }
+            
+            em {
+                color: #ccc;
+            }
         }
         
         @media (max-width: 768px) {
@@ -100,7 +146,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>原神 - 游逸旅闻数据</h1>
+        <h1>𝒜𝓃ℯ𝒸𝒹ℴ𝓉ℯ 𝒞𝒽𝓇ℴ𝓃𝒾𝒸𝓁ℯ𝓈</h1>
         
         <h2>月之一版本新增（挪德卡莱地区）</h2>
         

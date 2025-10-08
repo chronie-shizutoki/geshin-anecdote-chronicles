@@ -107,3 +107,47 @@
         max-width: 150px !important;
     }
 }
+/* 深色模式适配 */
+@media (prefers-color-scheme: dark) {
+    .select-selected {
+        background-color: #2c2c2c;
+        border-color: #555;
+        color: #f0f0f0;
+    }
+
+    .select-selected:hover {
+        border-color: #a0a0a0;
+    }
+
+    .select-selected::after {
+        color: #f0f0f0;
+    }
+
+    .select-items {
+        background-color: #2c2c2c;
+        border-color: #555;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .select-items div {
+        color: #f0f0f0;
+    }
+
+    .select-items div:hover,
+    .select-items .same-as-selected {
+        background-color: #444;
+        color: #fff;
+    }
+
+    .select-items::-webkit-scrollbar-track {
+        background: rgba(85, 85, 85, 0.1);
+    }
+
+    .select-items::-webkit-scrollbar-thumb {
+        background-color: #555;
+    }
+
+    .select-items::-webkit-scrollbar-thumb:hover {
+        background-color: #a0a0a0;
+    }
+}
