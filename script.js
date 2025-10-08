@@ -66,6 +66,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 初始化未完成任务数量显示
     updateIncompleteCount();
+    
+    // 初始化任务计数显示
+    updateTaskCounts();
 });
 
 // 本地存储相关函数
@@ -134,6 +137,25 @@ function updateIncompleteCount() {
     }
 }
 
+// 更新总数和当前显示数量
+function updateTaskCounts(filteredData = null) {
+    // 更新总数
+    const totalCountElement = document.getElementById('total-count');
+    if (totalCountElement) {
+        totalCountElement.textContent = characterData.length;
+    }
+    
+    // 更新当前显示数量
+    const currentCountElement = document.getElementById('current-count');
+    if (currentCountElement) {
+        // 如果传入了已筛选的数据，直接使用其长度作为当前显示数量
+        // 因为applyFilters已经处理了所有筛选条件
+        const currentCount = filteredData ? filteredData.length : characterData.length;
+        
+        currentCountElement.textContent = currentCount;
+    }
+}
+
 // 渲染主表格
 function renderTable(filteredData = null) {
     const tableBody = document.getElementById('table-body');
@@ -144,7 +166,10 @@ function renderTable(filteredData = null) {
     const showOnlyIncomplete = document.getElementById('show-completed')?.checked || false;
     
     // 更新未完成任务数量显示
-    updateIncompleteCount();    
+    updateIncompleteCount();
+    
+    // 更新总数和当前显示数量
+    updateTaskCounts(filteredData);
     data.forEach(item => {
         // 应用仅显示未完成的筛选
         if (showOnlyIncomplete && completedTasks[item.id]) {
@@ -259,7 +284,10 @@ function renderCards(filteredData = null) {
     const showOnlyIncomplete = document.getElementById('show-completed')?.checked || false;
     
     // 更新未完成任务数量显示
-    updateIncompleteCount();    
+    updateIncompleteCount();
+    
+    // 更新总数和当前显示数量
+    updateTaskCounts(filteredData);
     data.forEach(item => {
         // 应用仅显示未完成的筛选
         if (showOnlyIncomplete && completedTasks[item.id]) {
@@ -449,7 +477,7 @@ function addEventListeners() {
         initCustomSelectDisplay(regionFilter);
         initCustomSelectDisplay(versionFilter);
         
-        renderTable();
+        renderView();
     });
 }
 
