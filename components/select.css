@@ -104,7 +104,6 @@
 /* 响应式调整 */
 @media (max-width: 768px) {
     .custom-select {
-        min-width: auto;
-        width: 100%;
+        max-width: 150px !important;
     }
 }

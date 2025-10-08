@@ -373,6 +373,10 @@ body {
     .filter-group {
         justify-content: space-between;
     }
+
+    .filter-group input {
+        max-width: 150px;
+    }
     
     .table-section,
     .new-version-section {
@@ -414,13 +418,13 @@ body {
     }
     
     /* 地区装饰条 */
-    .card-mondstadt::before { background-color: #93c5fd; }
+    .card-mondstadt::before { background-color: #90EE90; }
     .card-liyue::before { background-color: #fbbf24; }
-    .card-inazuma::before { background-color: #f472b6; }
+    .card-inazuma::before { background-color: #a78bfa; }
     .card-sumeru::before { background-color: #22c55e; }
-    .card-fontaine::before { background-color: #60a5fa; }
+    .card-fontaine::before { background-color: #93c5fd; }
     .card-natlan::before { background-color: #ef4444; }
-    .card-nordkala::before { background-color: #a78bfa; }
+    .card-nordkala::before { background-color: #9ca3af; }
     
     /* 卡片标题 */
     .card-header {
