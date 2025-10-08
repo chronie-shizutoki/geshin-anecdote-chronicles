@@ -576,6 +576,27 @@ input[type="checkbox"]:checked {
     .show-more-btn:hover {
         background-color: #d1b78e;
     }
+    
+    /* 移动端按钮样式 */
+    .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #a86c4c;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 1.5;
+        width: 100%;
+        text-align: center;
+        user-select: none;
+        transition: background-color 0.3s ease;
+    }
+    
+    .btn:hover {
+        background-color: #8c543a;
+    }
 }
 
 /* 模态框样式 */
