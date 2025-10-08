@@ -96,6 +96,10 @@
 
     body .btn {
         background-color: #7d4d32;
+        display: inline-block;
+        line-height: 1.5;
+        text-align: center;
+        user-select: none;
     }
 
     body .btn:hover {

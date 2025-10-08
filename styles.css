@@ -244,6 +244,11 @@ input[type="checkbox"]:checked {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
+    display: inline-block;
+    line-height: 1.5;
+    text-align: center;
+    user-select: none;
+    font-size: 14px;
 }
 
 .btn:hover {
