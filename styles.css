@@ -68,7 +68,7 @@ input[type="checkbox"]:checked {
 
 /* 容器 */
 .container {
-    max-width: 1400px;
+    max-width: 80%;
     margin: 0 auto;
     padding: 20px;
     position: relative;
@@ -399,6 +399,10 @@ input[type="checkbox"]:checked {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
+    .container {
+    max-width: 95%;
+    }
+
     .header h1 {
         font-size: 2rem;
     }
