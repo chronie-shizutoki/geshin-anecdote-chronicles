@@ -320,6 +320,35 @@ body {
     background-color: rgba(167, 139, 250, 0.2);
 }
 
+/* 完成任务样式 */
+.completed-task {
+    background-color: rgba(167, 243, 208, 0.3);
+}
+
+.completed-task td {
+    text-decoration: line-through;
+    color: #6b7280;
+}
+
+.task-checkbox {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+/* 完成列样式 */
+.character-table th:first-child,
+.character-table td:first-child {
+    width: 60px;
+    text-align: center;
+}
+
+/* 卡片视图复选框样式 */
+.card-checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
 /* 页脚 */
 .footer {
     text-align: center;

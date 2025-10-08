@@ -145,16 +145,37 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', renderView);
 });
 
+// 本地存储相关函数
+function getCompletedTasks() {
+    const stored = localStorage.getItem('completedTasks');
+    return stored ? JSON.parse(stored) : {};
+}
+
+function saveCompletedTask(taskId, isCompleted) {
+    const completedTasks = getCompletedTasks();
+    completedTasks[taskId] = isCompleted;
+    localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
+}
+
 // 根据设备宽度渲染对应视图
-function renderView() {
+function renderView(filteredData = null) {
     const isMobile = window.innerWidth <= 768;
+    const hasFilteredData = filteredData !== null && filteredData !== undefined;
     
     // 为主要内容区域创建或更新视图
     if (isMobile) {
-        renderCards();
+        if (hasFilteredData) {
+            renderCards(filteredData);
+        } else {
+            renderCards();
+        }
         renderNewVersionCards();
     } else {
-        renderTable();
+        if (hasFilteredData) {
+            renderTable(filteredData);
+        } else {
+            renderTable();
+        }
         renderNewVersionTable();
     }
 }
@@ -165,8 +186,15 @@ function renderTable(filteredData = null) {
     tableBody.innerHTML = '';
     
     const data = filteredData || characterData;
+    const completedTasks = getCompletedTasks();
+    const showOnlyIncomplete = document.getElementById('show-completed')?.checked || false;
     
     data.forEach(item => {
+        // 应用仅显示未完成的筛选
+        if (showOnlyIncomplete && completedTasks[item.id]) {
+            return;
+        }
+        
         const row = document.createElement('tr');
         
         // 根据地区添加对应的样式类
@@ -180,6 +208,32 @@ function renderTable(filteredData = null) {
         else if (item.location.includes('挪德')) regionClass = 'region-nordkala';
         
         row.className = regionClass;
+        
+        // 如果任务已完成，添加完成样式
+        if (completedTasks[item.id]) {
+            row.classList.add('completed-task');
+        }
+        
+        // 完成状态复选框
+        const checkboxCell = document.createElement('td');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'task-checkbox';
+        checkbox.checked = completedTasks[item.id] || false;
+        checkbox.addEventListener('change', function() {
+            saveCompletedTask(item.id, this.checked);
+            if (this.checked) {
+                row.classList.add('completed-task');
+            } else {
+                row.classList.remove('completed-task');
+            }
+            // 如果启用了仅显示未完成，需要重新渲染表格
+            if (document.getElementById('show-completed')?.checked) {
+                renderTable(filteredData);
+            }
+        });
+        checkboxCell.appendChild(checkbox);
+        row.appendChild(checkboxCell);
         
         // 总计数
         const idCell = document.createElement('td');
@@ -245,8 +299,15 @@ function renderCards(filteredData = null) {
     }
     
     const data = filteredData || characterData;
+    const completedTasks = getCompletedTasks();
+    const showOnlyIncomplete = document.getElementById('show-completed')?.checked || false;
     
     data.forEach(item => {
+        // 应用仅显示未完成的筛选
+        if (showOnlyIncomplete && completedTasks[item.id]) {
+            return;
+        }
+        
         const card = document.createElement('div');
         card.className = 'character-card';
         
@@ -258,6 +319,11 @@ function renderCards(filteredData = null) {
         else if (item.location.includes('枫丹')) card.classList.add('card-fontaine');
         else if (item.location.includes('纳塔')) card.classList.add('card-natlan');
         else if (item.location.includes('挪德')) card.classList.add('card-nordkala');
+        
+        // 如果任务已完成，添加完成样式
+        if (completedTasks[item.id]) {
+            card.classList.add('completed-task');
+        }
         
         // 卡片标题
         const header = document.createElement('div');
@@ -271,8 +337,30 @@ function renderCards(filteredData = null) {
         versionTag.className = 'card-version';
         versionTag.textContent = item.version;
         
+        // 完成状态复选框
+        const checkboxContainer = document.createElement('div');
+        checkboxContainer.className = 'card-checkbox-container';
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'task-checkbox';
+        checkbox.checked = completedTasks[item.id] || false;
+        checkbox.addEventListener('change', function() {
+            saveCompletedTask(item.id, this.checked);
+            if (this.checked) {
+                card.classList.add('completed-task');
+            } else {
+                card.classList.remove('completed-task');
+            }
+            // 如果启用了仅显示未完成，需要重新渲染卡片
+            if (document.getElementById('show-completed')?.checked) {
+                renderCards(filteredData);
+            }
+        });
+        checkboxContainer.appendChild(checkbox);
+        
         header.appendChild(characterName);
         header.appendChild(versionTag);
+        header.appendChild(checkboxContainer);
         
         // 卡片内容
         const content = document.createElement('div');
@@ -374,9 +462,43 @@ function renderNewVersionTable() {
     const tableBody = document.getElementById('new-version-body');
     tableBody.innerHTML = '';
     
+    const completedTasks = getCompletedTasks();
+    const showOnlyIncomplete = document.getElementById('show-completed')?.checked || false;
+    
     newVersionData.forEach(item => {
+        // 应用仅显示未完成的筛选
+        if (showOnlyIncomplete && completedTasks[item.id]) {
+            return;
+        }
+        
         const row = document.createElement('tr');
         row.className = 'region-nordkala';
+        
+        // 如果任务已完成，添加完成样式
+        if (completedTasks[item.id]) {
+            row.classList.add('completed-task');
+        }
+        
+        // 完成状态复选框
+        const checkboxCell = document.createElement('td');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'task-checkbox';
+        checkbox.checked = completedTasks[item.id] || false;
+        checkbox.addEventListener('change', function() {
+            saveCompletedTask(item.id, this.checked);
+            if (this.checked) {
+                row.classList.add('completed-task');
+            } else {
+                row.classList.remove('completed-task');
+            }
+            // 如果启用了仅显示未完成，需要重新渲染表格
+            if (document.getElementById('show-completed')?.checked) {
+                renderNewVersionTable();
+            }
+        });
+        checkboxCell.appendChild(checkbox);
+        row.appendChild(checkboxCell);
         
         // 角色
         const characterCell = document.createElement('td');
@@ -524,6 +646,7 @@ function addEventListeners() {
     const versionFilter = document.getElementById('version-filter');
     const searchInput = document.getElementById('search-input');
     const clearButton = document.getElementById('clear-filter');
+    const showCompletedCheckbox = document.getElementById('show-completed');
     
     // 地区筛选
     regionFilter.addEventListener('change', applyFilters);
@@ -534,12 +657,20 @@ function addEventListeners() {
     // 搜索输入
     searchInput.addEventListener('input', applyFilters);
     
+    // 仅显示未完成筛选
+    showCompletedCheckbox.addEventListener('change', function() {
+        applyFilters();
+        renderNewVersionTable();
+    });
+    
     // 清除筛选
     clearButton.addEventListener('click', function() {
         regionFilter.value = 'all';
         versionFilter.value = 'all';
         searchInput.value = '';
+        showCompletedCheckbox.checked = false;
         renderTable();
+        renderNewVersionTable();
     });
 }
 
@@ -548,6 +679,8 @@ function applyFilters() {
     const regionFilter = document.getElementById('region-filter').value;
     const versionFilter = document.getElementById('version-filter').value;
     const searchTerm = document.getElementById('search-input').value.toLowerCase();
+    const showOnlyIncomplete = document.getElementById('show-completed')?.checked || false;
+    const completedTasks = getCompletedTasks();
     
     const filteredData = characterData.filter(item => {
         // 地区筛选
@@ -562,10 +695,13 @@ function applyFilters() {
                            item.travelName.toLowerCase().includes(searchTerm) ||
                            item.description.toLowerCase().includes(searchTerm);
         
-        return regionMatch && versionMatch && searchMatch;
+        // 未完成筛选
+        const incompleteMatch = !showOnlyIncomplete || !completedTasks[item.id];
+        
+        return regionMatch && versionMatch && searchMatch && incompleteMatch;
     });
     
-    renderTable(filteredData);
+    renderView(filteredData);
 }
 
 // 初始化回到顶部按钮
