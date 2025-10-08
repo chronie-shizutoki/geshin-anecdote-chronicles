@@ -225,6 +225,34 @@ body {
     background-color: #8c543a;
 }
 
+/* 导出/导入按钮样式 */
+.btn-export,
+.btn-import {
+    padding: 8px 16px;
+    background-color: #a86c4c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "SimSun", serif;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.btn-export:hover,
+.btn-import:hover {
+    background-color: #8c543a;
+}
+
+.file-import-container {
+    position: relative;
+    display: inline-block;
+}
+
+#import-data {
+    display: none;
+}
+
 /* 表格区域 */
 .table-section,
 .new-version-section {

@@ -130,6 +130,51 @@ const newVersionData = [
     { character: "辛焱", travelName: "[新演出]", location: "挪德卡莱 - 伦波岛 - 那夏镇 - 旗舰酒馆", hiddenCondition: "", extraCharacter: "" }
 ];
 
+// 导出数据功能
+const exportData = function() {
+    const completedTasks = getCompletedTasks();
+    const dataStr = JSON.stringify(completedTasks, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `geshin-anecdote-data-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+};
+
+// 导入数据功能
+const importData = function(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const importedData = JSON.parse(e.target.result);
+            // 验证导入的数据结构
+            if (typeof importedData === 'object') {
+                localStorage.setItem('completedTasks', JSON.stringify(importedData));
+                // 显示导入成功提示
+                alert('数据导入成功！页面将刷新以显示最新数据。');
+                // 刷新视图
+                renderView();
+            } else {
+                alert('无效的数据格式！请确保导入的是正确的JSON文件。');
+            }
+        } catch (error) {
+            alert('数据解析错误！请确保导入的是有效的JSON文件。');
+            console.error('导入数据时出错:', error);
+        }
+    };
+    reader.readAsText(file);
+    // 重置文件输入，以便可以重复选择同一个文件
+    event.target.value = '';
+};
+
 // DOM 加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
     // 渲染初始视图
@@ -143,6 +188,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 添加窗口大小变化监听器，实现响应式切换
     window.addEventListener('resize', renderView);
+    
+    // 为导出/导入按钮添加事件监听器
+    document.getElementById('export-data')?.addEventListener('click', exportData);
+    document.getElementById('import-data')?.addEventListener('change', importData);
 });
 
 // 本地存储相关函数
