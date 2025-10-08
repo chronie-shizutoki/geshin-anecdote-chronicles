@@ -223,8 +223,7 @@ body {
 }
 
 /* 表格区域 */
-.table-section,
-.new-version-section {
+.table-section {
     background-color: rgba(255, 255, 255, 0.7);
     padding: 25px;
     margin-bottom: 40px;
@@ -233,8 +232,7 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-.table-section h2,
-.new-version-section h2 {
+.table-section h2 {
     color: #8c543a;
     margin-bottom: 20px;
     text-align: center;
@@ -290,7 +288,7 @@ body {
 
 /* 区域高亮 */
 .region-mondstadt td:nth-child(5) {
-    background-color: rgba(147, 197, 253, 0.2);
+    background-color: rgba(144, 238, 144, 0.2);
 }
 
 .region-liyue td:nth-child(5) {
@@ -298,7 +296,7 @@ body {
 }
 
 .region-inazuma td:nth-child(5) {
-    background-color: rgba(244, 114, 182, 0.2);
+    background-color: rgba(167, 139, 250, 0.2);
 }
 
 .region-sumeru td:nth-child(5) {
@@ -306,7 +304,7 @@ body {
 }
 
 .region-fontaine td:nth-child(5) {
-    background-color: rgba(96, 165, 250, 0.2);
+    background-color: rgba(147, 197, 253, 0.2);
 }
 
 .region-natlan td:nth-child(5) {
@@ -314,7 +312,7 @@ body {
 }
 
 .region-nordkala td:nth-child(5) {
-    background-color: rgba(167, 139, 250, 0.2);
+    background-color: rgba(156, 163, 175, 0.2);
 }
 
 /* 完成任务样式 */
