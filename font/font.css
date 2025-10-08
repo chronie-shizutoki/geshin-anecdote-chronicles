@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'LXGWNeoZhiSongPlus';
+    src: url('LXGWNeoZhiSongPlus.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'IPAMJM';
+    src: url('font/ipamjm.ttf') format('truetype');
+}
+
+
+* {
+    font-family: 'LXGWNeoZhiSongPlus', serif;
+}

@@ -98,6 +98,16 @@ function renderView(filteredData = null) {
     }
 }
 
+// 在 DOM 加载完成后为新版本按钮添加点击事件监听器
+document.addEventListener('DOMContentLoaded', function() {
+    const newVersionBtn = document.getElementById('new-version-btn');
+    if (newVersionBtn) {
+        newVersionBtn.addEventListener('click', function() {
+            window.open('new-version.html', '_self');
+        });
+    }
+});
+
 // 渲染主表格
 function renderTable(filteredData = null) {
     const tableBody = document.getElementById('table-body');
