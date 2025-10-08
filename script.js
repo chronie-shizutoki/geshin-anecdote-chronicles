@@ -113,7 +113,7 @@ const characterData = [
 // 月之一版本新增数据
 const newVersionData = [
     { character: "菈乌玛", travelName: "①[聚会]<br>②[可承之重]", location: "挪德卡莱 - 希汐岛 - 霜月之坊", hiddenCondition: "", extraCharacter: "" },
-    { character: "雅珂达", travelName: "*①[对应酬劳]*<br>*②[喵！喂！猫——]*<br>③[对不赊啊！伊涅芙——]", location: "挪德卡莱 - 伦波岛 - 那夏镇 - 冒险家协会<br>挪德卡莱 - 帕哈岛 - 圣遗物副本（七天神像北方向）<br>挪德卡莱 - 伦波岛 - 叮铃眶啷蛋卷工坊", hiddenCondition: "与凯瑟琳对话后刷出<br>进入圣遗物副本后（消耗体力）退出副本来刷出<br>", extraCharacter: "" },
+    { character: "雅珂达", travelName: "*①[对应酬劳]*<br>*②[喵！喂！猫——]*<br>③[对不起啊！伊涅芙——]", location: "挪德卡莱 - 伦波岛 - 那夏镇 - 冒险家协会<br>挪德卡莱 - 帕哈岛 - 圣遗物副本（七天神像北方向）<br>挪德卡莱 - 伦波岛 - 叮铃眶啷蛋卷工坊", hiddenCondition: "与凯瑟琳对话后刷出<br>进入圣遗物副本后（消耗体力）退出副本来刷出<br>", extraCharacter: "" },
     { character: "菲林斯", travelName: "①[力有未逮]<br>*②[巡视]*<br>*③[藏品]*<br>④[古市]<br>⑤[日常所需]<br>⑥[意外助手]", location: "挪德卡莱 - 伦波岛 - 空寂走廊（西南方向）<br>挪德卡莱 - 帕哈岛 - 圣遗物副本（七天神像北方向）<br>挪德卡莱 - 伦波岛 - 邦夏镇 - 伏尼契商会（地图钻石图标）<br>挪德卡莱 - 伦波岛 - 那夏镇<br>挪德卡莱 - 帕哈岛 - 终夜长茔<br>挪德卡莱 - 帕哈岛 - 终夜长茔", hiddenCondition: "进入圣遗物副本后（消耗体力）退出副本来刷出<br>伏尼契商会对话后刷出<br>", extraCharacter: "伊涅芙<br>伊涅芙<br>" },
     { character: "爱诺", travelName: "①[救治]<br>②[选择…]<br>③[时间足够你遣别]<br>④[喵，可爱]<br>*⑤[运转吧，伊涅芙]*", location: "挪德卡莱 - 伦波岛 - 叮铃眶啷蛋卷工坊<br>挪德卡莱 - 伦波岛 - 叮铃哐啷蛋卷工坊<br>挪德卡莱 - 伦波岛 - 叮铃哐啷蛋卷工坊<br>挪德卡莱 - 伦波岛 - 叮铃哐啷蛋卷工坊<br>挪德卡莱 - 伦波岛 - 那夏镇 - 合成台", hiddenCondition: "使用合成台后刷出<br>使用合成台后刷出<br>使用合成台后刷出<br>使用合成台后刷出<br>与凯瑟琳对话后刷出", extraCharacter: "伊涅芙<br>伊涅芙<br>伊涅芙、菈乌玛<br>伊涅芙<br>伊涅芙" },
     { character: "奈芙尔", travelName: "*①[靠谱与否]*", location: "挪德卡莱 - 伦波岛 - 邦夏镇 - 秘法书屋", hiddenCondition: "与书店老板对话后刷出", extraCharacter: "夜兰" },
@@ -409,20 +409,23 @@ function renderCards(filteredData = null) {
         descValue.textContent = item.description;
         
         // 检查描述是否需要截断显示
-        if (item.description.length > 100) {
+        if (item.description.length > 12) {
             descValue.classList.add('truncated');
             
             const showMoreBtn = document.createElement('button');
             showMoreBtn.className = 'show-more-btn';
-            showMoreBtn.textContent = '显示全部';
+            showMoreBtn.textContent = '展开';
             
             showMoreBtn.addEventListener('click', function() {
                 descValue.classList.toggle('truncated');
-                this.textContent = descValue.classList.contains('truncated') ? '显示全部' : '收起';
+                this.textContent = descValue.classList.contains('truncated') ? '展开' : '收起';
             });
             
-            descContainer.appendChild(descValue);
-            descContainer.appendChild(showMoreBtn);
+            // 将按钮和文本都添加到一个内联容器中，使按钮显示在文本后面
+            const inlineContainer = document.createElement('span');
+            inlineContainer.appendChild(descValue);
+            inlineContainer.appendChild(showMoreBtn);
+            descContainer.appendChild(inlineContainer);
         } else {
             descContainer.appendChild(descValue);
         }
