@@ -366,87 +366,82 @@ function renderCards(filteredData = null) {
         const content = document.createElement('div');
         content.className = 'card-content';
         
-        // 游逸旅闻
-        const travelItem = document.createElement('div');
-        travelItem.className = 'card-item';
+        // 游逸旅闻和地点组合显示
+        const travelLocationItem = document.createElement('div');
+        travelLocationItem.className = 'card-item travel-location';
         
-        const travelLabel = document.createElement('span');
-        travelLabel.className = 'card-label';
-        travelLabel.textContent = '游逸旅闻：';
+        const travelLocationValue = document.createElement('span');
+        travelLocationValue.className = 'card-value';
+        if (item.isHidden) travelLocationValue.classList.add('hidden-travel');
+        travelLocationValue.textContent = `${item.travelName} ${item.location}`;
         
-        const travelValue = document.createElement('span');
-        travelValue.className = 'card-value';
-        if (item.isHidden) travelValue.classList.add('hidden-travel');
-        travelValue.textContent = item.travelName;
+        travelLocationItem.appendChild(travelLocationValue);
         
-        travelItem.appendChild(travelLabel);
-        travelItem.appendChild(travelValue);
-        
-        // 地点
-        const locationItem = document.createElement('div');
-        locationItem.className = 'card-item';
-        
-        const locationLabel = document.createElement('span');
-        locationLabel.className = 'card-label';
-        locationLabel.textContent = '地点：';
-        
-        const locationValue = document.createElement('span');
-        locationValue.className = 'card-value';
-        locationValue.textContent = item.location;
-        
-        locationItem.appendChild(locationLabel);
-        locationItem.appendChild(locationValue);
-        
-        // 隐藏触发条件
+        // 隐藏触发条件 - 只有当有内容时才显示
         const conditionItem = document.createElement('div');
-        conditionItem.className = 'card-item';
-        
-        const conditionLabel = document.createElement('span');
-        conditionLabel.className = 'card-label';
-        conditionLabel.textContent = '隐藏触发条件：';
+        conditionItem.className = 'card-item condition-item';
         
         const conditionValue = document.createElement('span');
         conditionValue.className = 'card-value';
-        conditionValue.textContent = item.hiddenCondition || '-';
+        conditionValue.innerHTML = `<strong>隐藏触发条件：</strong>${item.hiddenCondition || '-'}`;
         
-        conditionItem.appendChild(conditionLabel);
         conditionItem.appendChild(conditionValue);
         
-        // 额外出场角色
+        // 额外出场角色 - 只有当有内容时才显示
         const extraItem = document.createElement('div');
-        extraItem.className = 'card-item';
-        
-        const extraLabel = document.createElement('span');
-        extraLabel.className = 'card-label';
-        extraLabel.textContent = '额外出场角色：';
+        extraItem.className = 'card-item extra-item';
         
         const extraValue = document.createElement('span');
         extraValue.className = 'card-value';
-        extraValue.textContent = item.extraCharacter || '-';
+        extraValue.innerHTML = `<strong>额外出场角色：</strong>${item.extraCharacter || '-'}`;
         
-        extraItem.appendChild(extraLabel);
         extraItem.appendChild(extraValue);
         
-        // 描述
+        // 描述 - 限制一行，超出部分显示省略号，提供显示全部按钮
         const descItem = document.createElement('div');
-        descItem.className = 'card-item';
+        descItem.className = 'card-item description-item';
         
-        const descLabel = document.createElement('span');
-        descLabel.className = 'card-label';
-        descLabel.textContent = '描述：';
+        const descContainer = document.createElement('div');
+        descContainer.className = 'description-container';
         
         const descValue = document.createElement('span');
-        descValue.className = 'card-value';
+        descValue.className = 'card-value description-text';
         descValue.textContent = item.description;
         
-        descItem.appendChild(descLabel);
-        descItem.appendChild(descValue);
+        // 检查描述是否需要截断显示
+        if (item.description.length > 100) {
+            descValue.classList.add('truncated');
+            
+            const showMoreBtn = document.createElement('button');
+            showMoreBtn.className = 'show-more-btn';
+            showMoreBtn.textContent = '显示全部';
+            
+            showMoreBtn.addEventListener('click', function() {
+                descValue.classList.toggle('truncated');
+                this.textContent = descValue.classList.contains('truncated') ? '显示全部' : '收起';
+            });
+            
+            descContainer.appendChild(descValue);
+            descContainer.appendChild(showMoreBtn);
+        } else {
+            descContainer.appendChild(descValue);
+        }
+        
+        descItem.appendChild(descContainer);
         
         // 组合卡片内容
-        content.appendChild(travelItem);
-        content.appendChild(locationItem);
-        content.appendChild(conditionItem);
-        content.appendChild(extraItem);
+        content.appendChild(travelLocationItem);
+        
+        // 只有当隐藏触发条件有内容时才添加
+        if (item.hiddenCondition && item.hiddenCondition !== '-') {
+            content.appendChild(conditionItem);
+        }
+        
+        // 只有当额外出场角色有内容时才添加
+        if (item.extraCharacter && item.extraCharacter !== '-') {
+            content.appendChild(extraItem);
+        }
+        
         content.appendChild(descItem);
         
         // 组合卡片
@@ -466,8 +461,11 @@ function renderNewVersionTable() {
     const showOnlyIncomplete = document.getElementById('show-completed')?.checked || false;
     
     newVersionData.forEach(item => {
+        // 为每个item生成一个唯一的标识符
+        const taskId = `new-version-${item.character}-${item.travelName.replace(/\s+/g, '-')}`;
+        
         // 应用仅显示未完成的筛选
-        if (showOnlyIncomplete && completedTasks[item.id]) {
+        if (showOnlyIncomplete && completedTasks[taskId]) {
             return;
         }
         
@@ -475,7 +473,7 @@ function renderNewVersionTable() {
         row.className = 'region-nordkala';
         
         // 如果任务已完成，添加完成样式
-        if (completedTasks[item.id]) {
+        if (completedTasks[taskId]) {
             row.classList.add('completed-task');
         }
         
@@ -484,9 +482,9 @@ function renderNewVersionTable() {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.className = 'task-checkbox';
-        checkbox.checked = completedTasks[item.id] || false;
+        checkbox.checked = completedTasks[taskId] || false;
         checkbox.addEventListener('change', function() {
-            saveCompletedTask(item.id, this.checked);
+            saveCompletedTask(taskId, this.checked);
             if (this.checked) {
                 row.classList.add('completed-task');
             } else {
@@ -543,9 +541,24 @@ function renderNewVersionCards() {
         cardContainer.innerHTML = '';
     }
     
+    // 获取完成任务数据和仅显示未完成复选框状态
+    const completedTasks = getCompletedTasks();
+    const showOnlyIncomplete = document.getElementById('show-completed')?.checked || false;
+    
     newVersionData.forEach(item => {
+        // 为每个item生成一个唯一的标识符
+        const taskId = item.id || `new-version-${item.character}-${item.travelName.replace(/\s+/g, '-')}`;
+        
+        // 检查是否完成
+        const isCompleted = completedTasks[taskId];
+        
+        // 如果仅显示未完成且当前任务已完成，则跳过渲染
+        if (showOnlyIncomplete && isCompleted) {
+            return;
+        }
+        
         const card = document.createElement('div');
-        card.className = 'character-card card-nordkala';
+        card.className = 'character-card card-nordkala' + (isCompleted ? ' completed-task' : '');
         
         // 卡片标题
         const header = document.createElement('div');
@@ -559,78 +572,78 @@ function renderNewVersionCards() {
         versionTag.className = 'card-version';
         versionTag.textContent = '月之一';
         
+        // 添加完成复选框
+        const checkboxContainer = document.createElement('div');
+        checkboxContainer.className = 'card-checkbox-container';
+        
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'task-checkbox';
+        checkbox.checked = isCompleted || false;
+        
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                card.classList.add('completed-task');
+                saveCompletedTask(taskId, true);
+            } else {
+                card.classList.remove('completed-task');
+                saveCompletedTask(taskId, false);
+            }
+        });
+        
+        checkboxContainer.appendChild(checkbox);
+        
         header.appendChild(characterName);
         header.appendChild(versionTag);
+        header.appendChild(checkboxContainer);
         
         // 卡片内容
         const content = document.createElement('div');
         content.className = 'card-content';
         
-        // 游逸旅闻
-        const travelItem = document.createElement('div');
-        travelItem.className = 'card-item';
+        // 游逸旅闻和地点组合显示
+        const travelLocationItem = document.createElement('div');
+        travelLocationItem.className = 'card-item travel-location';
         
-        const travelLabel = document.createElement('span');
-        travelLabel.className = 'card-label';
-        travelLabel.textContent = '游逸旅闻：';
+        const travelLocationValue = document.createElement('span');
+        travelLocationValue.className = 'card-value';
+        if (item.isHidden) travelLocationValue.classList.add('hidden-travel');
+        travelLocationValue.innerHTML = `${item.travelName} ${item.location}`;
         
-        const travelValue = document.createElement('span');
-        travelValue.className = 'card-value';
-        travelValue.innerHTML = item.travelName;
+        travelLocationItem.appendChild(travelLocationValue);
         
-        travelItem.appendChild(travelLabel);
-        travelItem.appendChild(travelValue);
-        
-        // 地点
-        const locationItem = document.createElement('div');
-        locationItem.className = 'card-item';
-        
-        const locationLabel = document.createElement('span');
-        locationLabel.className = 'card-label';
-        locationLabel.textContent = '地点：';
-        
-        const locationValue = document.createElement('span');
-        locationValue.className = 'card-value';
-        locationValue.innerHTML = item.location;
-        
-        locationItem.appendChild(locationLabel);
-        locationItem.appendChild(locationValue);
-        
-        // 隐藏触发条件
+        // 隐藏触发条件 - 只有当有内容时才显示
         const conditionItem = document.createElement('div');
-        conditionItem.className = 'card-item';
-        
-        const conditionLabel = document.createElement('span');
-        conditionLabel.className = 'card-label';
-        conditionLabel.textContent = '隐藏触发条件：';
+        conditionItem.className = 'card-item condition-item';
         
         const conditionValue = document.createElement('span');
         conditionValue.className = 'card-value';
-        conditionValue.innerHTML = item.hiddenCondition || '-';
+        conditionValue.innerHTML = `<strong>隐藏触发条件：</strong>${item.hiddenCondition || '-'}`;
         
-        conditionItem.appendChild(conditionLabel);
         conditionItem.appendChild(conditionValue);
         
-        // 额外出场角色
+        // 额外出场角色 - 只有当有内容时才显示
         const extraItem = document.createElement('div');
-        extraItem.className = 'card-item';
-        
-        const extraLabel = document.createElement('span');
-        extraLabel.className = 'card-label';
-        extraLabel.textContent = '额外出场角色：';
+        extraItem.className = 'card-item extra-item';
         
         const extraValue = document.createElement('span');
         extraValue.className = 'card-value';
-        extraValue.innerHTML = item.extraCharacter || '-';
+        extraValue.innerHTML = `<strong>额外出场角色：</strong>${item.extraCharacter || '-'}`;
         
-        extraItem.appendChild(extraLabel);
         extraItem.appendChild(extraValue);
         
         // 组合卡片内容
-        content.appendChild(travelItem);
-        content.appendChild(locationItem);
-        content.appendChild(conditionItem);
-        content.appendChild(extraItem);
+        content.appendChild(travelLocationItem);
+        
+        // 只有当隐藏触发条件有内容时才添加
+        if (item.hiddenCondition && item.hiddenCondition !== '-') {
+            content.appendChild(conditionItem);
+        }
+        
+        // 只有当额外出场角色有内容时才添加
+        if (item.extraCharacter && item.extraCharacter !== '-') {
+            content.appendChild(extraItem);
+        }
         
         // 组合卡片
         card.appendChild(header);
