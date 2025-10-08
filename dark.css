@@ -75,6 +75,25 @@
         color: #e0e0e0;
     }
 
+    /* 复选框样式 - 深色模式 */
+    body input[type="checkbox"] {
+        accent-color: #7d4d32;
+        background-color: #2a2a2a;
+        border-color: #5a5a5a;
+    }
+
+    body input[type="checkbox"]:checked {
+        background-color: #7d4d32;
+    }
+
+    /* 特定复选框样式 */
+    body #show-completed,
+    body .task-checkbox {
+        accent-color: #7d4d32;
+        background-color: #2a2a2a;
+        border-color: #5a5a5a;
+    }
+
     body .btn {
         background-color: #7d4d32;
     }
