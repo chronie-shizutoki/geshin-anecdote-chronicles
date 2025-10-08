@@ -617,6 +617,12 @@ input[type="checkbox"]:checked {
     background-color: rgba(0,0,0,0.4);
     padding-top: 60px;
     animation: fadeIn 0.3s ease;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal.fade-out {
+    opacity: 0;
 }
 
 @keyframes fadeIn {
@@ -633,10 +639,17 @@ input[type="checkbox"]:checked {
     max-width: 600px;
     border-radius: 8px;
     font-family: 'LXGWNeoZhiSongPlus', serif;
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
     animation: slideIn 0.3s ease;
     line-height: 1.6;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.modal-content.slide-out {
+    opacity: 0;
+    transform: translateY(-20px);
 }
 
 @keyframes slideIn {

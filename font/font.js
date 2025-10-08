@@ -27,54 +27,60 @@ class FontManager {
         // 点击关闭按钮或模态框外部区域隐藏弹窗
         if (this.closeBtn) {
             this.closeBtn.addEventListener('click', () => {
-                this.fontLicenseModal.style.display = 'none';
+                this.closeModal();
             });
         }
         
         // 点击恢复原始授权字体按钮
         if (this.restoreOriginalFontBtn) {
             this.restoreOriginalFontBtn.addEventListener('click', () => {
-                this.restoreOriginalFont();
+                // 存储用户偏好到localStorage
+                localStorage.setItem('fontPreference', 'original');
+                
+                // 显示动画后再关闭弹窗并刷新页面
+                this.closeModal(true);
             });
         }
         
         // 点击重新使用衍生字体按钮
         if (this.useDerivedFontBtn) {
             this.useDerivedFontBtn.addEventListener('click', () => {
-                this.useDerivedFont();
+                // 存储用户偏好到localStorage
+                localStorage.setItem('fontPreference', 'derived');
+                
+                // 显示动画后再关闭弹窗并刷新页面
+                this.closeModal(true);
             });
         }
         
         // 点击模态框外部区域关闭弹窗
         window.addEventListener('click', (event) => {
             if (event.target === this.fontLicenseModal) {
-                this.fontLicenseModal.style.display = 'none';
+                this.closeModal();
             }
         });
     }
     
-    // 恢复原始授权字体
-    restoreOriginalFont() {
-        // 存储用户偏好到localStorage
-        localStorage.setItem('fontPreference', 'original');
+    // 关闭弹窗方法（带动画效果）
+    closeModal(needReload = false) {
+        const modalContent = this.fontLicenseModal.querySelector('.modal-content');
         
-        // 关闭模态框
-        this.fontLicenseModal.style.display = 'none';
+        // 添加关闭动画类
+        this.fontLicenseModal.classList.add('fade-out');
+        modalContent.classList.add('slide-out');
         
-        // 重新加载页面以应用字体变更
-        location.reload();
-    }
-    
-    // 重新使用衍生字体
-    useDerivedFont() {
-        // 存储用户偏好到localStorage
-        localStorage.setItem('fontPreference', 'derived');
-        
-        // 关闭模态框
-        this.fontLicenseModal.style.display = 'none';
-        
-        // 重新加载页面以应用字体变更
-        location.reload();
+        // 动画结束后隐藏弹窗
+        setTimeout(() => {
+            this.fontLicenseModal.style.display = 'none';
+            // 移除动画类，以便下次打开时重新触发动画
+            this.fontLicenseModal.classList.remove('fade-out');
+            modalContent.classList.remove('slide-out');
+            
+            // 如果需要重新加载页面
+            if (needReload) {
+                location.reload();
+            }
+        }, 300); // 与动画持续时间相同
     }
     
     // 检查用户的字体偏好设置

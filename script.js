@@ -561,22 +561,38 @@ document.addEventListener('DOMContentLoaded', function() {
             loadUpdateLog();
         });
         
+        // 关闭弹窗函数
+        function closeModal(modal) {
+            const modalContent = modal.querySelector('.modal-content');
+            // 添加关闭动画类
+            modal.classList.add('fade-out');
+            modalContent.classList.add('slide-out');
+            
+            // 动画结束后隐藏弹窗
+            setTimeout(() => {
+                modal.style.display = 'none';
+                // 移除动画类，以便下次打开时重新触发动画
+                modal.classList.remove('fade-out');
+                modalContent.classList.remove('slide-out');
+            }, 300); // 与动画持续时间相同
+        }
+        
         // 关闭弹窗
         updateLogClose.addEventListener('click', function() {
-            updateLogModal.style.display = 'none';
+            closeModal(updateLogModal);
         });
         
         // 点击弹窗外部关闭弹窗
         window.addEventListener('click', function(event) {
             if (event.target === updateLogModal) {
-                updateLogModal.style.display = 'none';
+                closeModal(updateLogModal);
             }
         });
         
         // ESC键关闭弹窗
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape' && updateLogModal.style.display === 'block') {
-                updateLogModal.style.display = 'none';
+                closeModal(updateLogModal);
             }
         });
     }
