@@ -84,14 +84,27 @@
             
             <section class="filter-section">
                 <div class="filter-controls">
+                    <button id="new-version-btn" class="btn">新版本更新内容</button>
                     <button id="export-data" class="btn">导出数据</button>
                     <div class="file-import-container">
                         <label for="import-data" class="btn">导入数据</label>
                         <input type="file" id="import-data" accept=".json" style="display: none;">
                     </div>
+                    
+                    <!-- 更新日志按钮 -->
+                    <button id="update-log-btn" class="btn">更新日志</button>
+                    <!-- 更新日志弹窗 -->
+                    <div id="update-log-modal" class="modal" style="display: none;">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <div id="update-log-content">
+                                <p class="loading-indicator">加载中...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <!-- 字体授权操作按钮 -->
                     <button id="font-license-btn" class="btn">字体设置与授权声明</button>
-                    <button id="new-version-btn" class="btn">新版本更新内容</button>
                     <button id="feedback-btn" class="btn">反馈</button>
                     <!-- 字体授权提示弹窗 -->
                     <div id="font-license-modal" class="modal" style="display: none;">

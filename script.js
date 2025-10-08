@@ -546,4 +546,95 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', function() {
         renderView();
     });
+    
+    // 为更新日志按钮添加点击事件监听器
+    const updateLogBtn = document.getElementById('update-log-btn');
+    const updateLogModal = document.getElementById('update-log-modal');
+    const updateLogClose = updateLogModal?.querySelector('.close');
+    const updateLogContent = document.getElementById('update-log-content');
+    
+    if (updateLogBtn && updateLogModal && updateLogClose && updateLogContent) {
+        // 显示弹窗
+        updateLogBtn.addEventListener('click', function() {
+            updateLogModal.style.display = 'block';
+            // 加载更新日志内容
+            loadUpdateLog();
+        });
+        
+        // 关闭弹窗
+        updateLogClose.addEventListener('click', function() {
+            updateLogModal.style.display = 'none';
+        });
+        
+        // 点击弹窗外部关闭弹窗
+        window.addEventListener('click', function(event) {
+            if (event.target === updateLogModal) {
+                updateLogModal.style.display = 'none';
+            }
+        });
+        
+        // ESC键关闭弹窗
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && updateLogModal.style.display === 'block') {
+                updateLogModal.style.display = 'none';
+            }
+        });
+    }
+    
+    // 加载更新日志内容
+    function loadUpdateLog() {
+        if (!updateLogContent) return;
+        
+        // 显示加载状态
+        updateLogContent.innerHTML = '<p class="loading-indicator">加载中...</p>';
+        
+        // 使用fetch获取Markdown文件内容
+        fetch('doc/update-log.md')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(markdown => {
+                // 将Markdown转换为HTML
+                const html = convertMarkdownToHtml(markdown);
+                updateLogContent.innerHTML = html;
+            })
+            .catch(error => {
+                console.error('加载更新日志失败:', error);
+                updateLogContent.innerHTML = '<p class="error-message">加载更新日志失败，请刷新页面重试。</p>';
+            });
+    }
+    
+    // Markdown转HTML函数
+    function convertMarkdownToHtml(markdown) {
+    let html = markdown
+        // 转换一级标题 (#) - 应该是h1而不是h3
+        .replace(/^#\s+(.+)$/gm, '<h1>$1</h1>')
+        // 转换二级标题 (##) - 应该是h2而不是h4
+        .replace(/^##\s+(.+)$/gm, '<h2>$1</h2>')
+        // 转换三级标题 (###)
+        .replace(/^###\s+(.+)$/gm, '<h3>$1</h3>')
+        // 转换无序列表 (-)，先包装整个列表
+        .replace(/(?:^-\s+(.+)(?:\n|$))+/gm, match => {
+            const items = match.split('\n').filter(line => line.trim());
+            const listItems = items.map(item => 
+                item.replace(/^-\s+(.+)$/, '<li>$1</li>')
+            ).join('');
+            return `<ul>${listItems}</ul>`;
+        })
+        // 转换加粗文本 (**text**)
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        // 处理单独的#号，转换为换行
+        .replace(/^#$/gm, '<br>')
+        // 处理段落 - 将连续的非空行作为段落
+        .replace(/(.+?)(?:\r?\n|$)/g, '<p>$1</p>')
+        // 清理空的段落
+        .replace(/<p><\/p>/g, '')
+        // 处理未转换的#号，转换为空格（放在最后避免影响前面的规则）
+        .replace(/(?<!<[^>]*)#(?!\s)/g, ' ');
+
+    return html;
+}
 });
