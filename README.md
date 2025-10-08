@@ -28,7 +28,17 @@ geshin-anecdote-chronicles/
 
 ### 本地使用（不推荐）
 1. 将所有文件下载到本地同一目录。
-2. 双击 `index.html` 文件在浏览器中打开。
+2. 开启服务器，例如使用 Python 内置的 HTTP 服务器：
+   ```bash
+   python -m http.server 8000
+   python -m http.server 8000  --bind 0.0.0.0 //可选，绑定所有IP地址，方便移动端访问
+   ```
+   或者使用 Node.js 中的 `http-server` 模块：
+   ```bash
+   npm install -g http-server
+   http-server
+   ```
+3. 访问 `http://localhost:8000` 即可在本地查看。
 
 ### 查看方式
 - **桌面端**：数据将以表格形式展示，方便查看和对比。
