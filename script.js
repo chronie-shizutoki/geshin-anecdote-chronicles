@@ -108,6 +108,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// 在 DOM 加载完成后为反馈按钮添加点击事件监听器
+document.addEventListener('DOMContentLoaded', function() {
+    const feedbackBtn = document.getElementById('feedback-btn');
+    if (feedbackBtn) {
+        feedbackBtn.addEventListener('click', function() {
+            window.open('https://wj.qq.com/s2/24219207/e16c/', '_blank');
+        });
+    }
+});
+
 // 渲染主表格
 function renderTable(filteredData = null) {
     const tableBody = document.getElementById('table-body');
