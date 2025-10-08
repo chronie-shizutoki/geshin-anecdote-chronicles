@@ -616,18 +616,78 @@ input[type="checkbox"]:checked {
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
     padding-top: 60px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .modal-content {
     background-color: #fefefe;
     margin: 5% auto;
-    padding: 20px;
+    padding: 30px;
     border: 1px solid #888;
     width: 80%;
     max-width: 600px;
     border-radius: 8px;
     font-family: 'LXGWNeoZhiSongPlus', serif;
     transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    animation: slideIn 0.3s ease;
+    line-height: 1.6;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 更新日志内容样式 */
+#update-log-content {
+    padding: 20px;
+    line-height: 1.8;
+}
+
+#update-log-content h1,
+#update-log-content h2,
+#update-log-content h3,
+#update-log-content h4 {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: #8c543a;
+}
+
+#update-log-content h1 {
+    font-size: 1.8rem;
+    border-bottom: 2px solid #d1b78e;
+    padding-bottom: 10px;
+}
+
+#update-log-content h2 {
+    font-size: 1.5rem;
+    border-bottom: 1px solid #e9d9c5;
+    padding-bottom: 8px;
+}
+
+#update-log-content ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+#update-log-content li {
+    margin-bottom: 10px;
+}
+
+#update-log-content strong {
+    color: #a86c4c;
 }
 
 .close {
@@ -636,6 +696,8 @@ input[type="checkbox"]:checked {
     font-size: 28px;
     font-weight: bold;
     transition: color 0.3s ease;
+    cursor: pointer;
+    line-height: 1;
 }
 
 .close:hover,
@@ -652,4 +714,57 @@ input[type="checkbox"]:checked {
 
 .modal-buttons .btn {
     margin: 0 10px;
+}
+
+/* 字体授权弹窗特定样式 */
+#font-license-modal .modal-content p {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+#font-license-modal .modal-content a {
+    color: #a86c4c;
+    text-decoration: none;
+    border-bottom: 1px dotted #a86c4c;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+#font-license-modal .modal-content a:hover {
+    color: #8c543a;
+    border-bottom: 1px solid #8c543a;
+}
+
+/* 移动端适配 - 模态框 */
+@media (max-width: 768px) {
+    .modal {
+        padding-top: 40px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+        padding: 20px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .modal-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .modal-buttons .btn {
+        margin: 0;
+        width: 100%;
+    }
+    
+    #font-license-modal .modal-content p {
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+    }
+    
+    #font-license-modal .modal-content a {
+        word-break: break-all;
+    }
 }
