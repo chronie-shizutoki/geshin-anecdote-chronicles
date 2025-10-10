@@ -51,7 +51,7 @@ function createCustomSelect(select) {
     
     // 创建选项容器
     const itemsContainer = document.createElement('div');
-    itemsContainer.setAttribute('class', 'select-items select-hide');
+    itemsContainer.setAttribute('class', 'select-items');
     customSelect.appendChild(itemsContainer);
     
     // 为每个选项创建自定义选项元素
