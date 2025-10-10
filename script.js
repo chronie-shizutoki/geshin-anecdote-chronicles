@@ -90,9 +90,7 @@ function loadPrePopup() {
     
     // 检查用户是否已经关闭过弹窗（使用localStorage存储）
     const hasClosedPopup = localStorage.getItem('prePopupClosed');
-    if (hasClosedPopup) {
-        return; // 用户已经关闭过弹窗，不再显示
-    }
+    const storedPopupTime = localStorage.getItem('prePopupTime');
     
     // 从JSON文件加载弹窗配置
     fetch('data/popup-config.json')
@@ -104,10 +102,22 @@ function loadPrePopup() {
         })
         .then(config => {
             // 检查是否需要显示弹窗
-            if (config.showPopup) {
+            if (!config.showPopup) {
+                return;
+            }
+            
+            // 检查用户是否已经关闭过该版本的弹窗
+            if (hasClosedPopup && storedPopupTime === config.time) {
+                return;
+            }
                 // 设置弹窗内容
                 popupTitle.textContent = config.title || '通知';
-                popupContent.textContent = config.content || '';
+                // 使用innerHTML和<br>标签来正确显示换行
+                popupContent.innerHTML = '';
+                if (config.time) {
+                    popupContent.innerHTML += config.time + '<br><br>';
+                }
+                popupContent.innerHTML += config.content || '';
                 popupButton.textContent = config.buttonText || '确定';
                 
                 // 显示弹窗，添加动画效果
@@ -127,8 +137,9 @@ function loadPrePopup() {
                     
                     // 记录用户已经关闭过弹窗
                     localStorage.setItem('prePopupClosed', 'true');
+                    // 记录弹窗显示时间
+                    localStorage.setItem('prePopupTime', config.time || '');
                 });
-            }
         })
         .catch(error => {
             console.error('加载弹窗配置时出错:', error);
