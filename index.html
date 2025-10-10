@@ -41,18 +41,21 @@
         
         <!-- 主要内容区域 -->
         <main class="content">
-            <!-- 注意事项区域 -->
-            <section class="notice-section">
-                <h2>注意事项</h2>
-                <div class="notice-box">
-                    <ul class="notice-list">
-                        <li>隐藏游逸旅闻目前来说一般1天仅能触发1条，概率触发，没刷出的可以第二天再试试看</li>
-                        <li>目前全部完成是有108个记录，共116个逸闻印签，原因是鹿野院平藏的 [静待] 和 爱诺的 [时间足够你道别] 做完会1次会给5个逸闻印签</li>
-                        <li>目前完成重复游逸旅闻可能还会给逸闻印签，不确定</li>
-                        <li>要想统计自己获取的逸闻印签总数量：计算公式 =（自助查询路径：米游社-联系客服-原神-货币记录-原石）「游逸旅闻」奖励 +50 的数据条数 × 10 + 游戏内逸闻印签数量</li>
-                    </ul>
+            <!-- 注意事项弹窗 -->
+            <div id="notice-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>注意事项</h2>
+                    <div class="notice-box">
+                        <ul class="notice-list">
+                            <li>隐藏游逸旅闻目前来说一般1天仅能触发1条，概率触发，没刷出的可以第二天再试试看</li>
+                            <li>目前全部完成是有108个记录，共116个逸闻印签，原因是鹿野院平藏的 [静待] 和 爱诺的 [时间足够你道别] 做完会1次会给5个逸闻印签</li>
+                            <li>目前完成重复游逸旅闻可能还会给逸闻印签，不确定</li>
+                            <li>要想统计自己获取的逸闻印签总数量：计算公式 =（自助查询路径：米游社-联系客服-原神-货币记录-原石）「游逸旅闻」奖励 +50 的数据条数 × 10 + 游戏内逸闻印签数量</li>
+                        </ul>
+                    </div>
                 </div>
-            </section>
+            </div>
             
             <!-- 过滤和搜索区域 -->
             <section class="filter-section">
@@ -94,6 +97,7 @@
             <section class="filter-section">
                 <div class="filter-controls">
                     <button id="new-version-btn" class="btn">新版本更新内容</button>
+                    <button id="notice-btn" class="btn">注意事项</button>
                     <button id="export-data" class="btn">导出数据</button>
                     <div class="file-import-container">
                         <label for="import-data" class="btn">导入数据</label>

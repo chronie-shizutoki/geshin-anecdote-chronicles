@@ -622,6 +622,22 @@ document.addEventListener('DOMContentLoaded', function() {
         renderView();
     });
     
+    // 关闭弹窗函数 - 提取为共享函数，供所有弹窗使用
+    function closeModal(modal) {
+        const modalContent = modal.querySelector('.modal-content');
+        // 添加关闭动画类
+        modal.classList.add('fade-out');
+        modalContent.classList.add('slide-out');
+        
+        // 动画结束后隐藏弹窗
+        setTimeout(() => {
+            modal.style.display = 'none';
+            // 移除动画类，以便下次打开时重新触发动画
+            modal.classList.remove('fade-out');
+            modalContent.classList.remove('slide-out');
+        }, 300); // 与动画持续时间相同
+    }
+    
     // 为更新日志按钮添加点击事件监听器
     const updateLogBtn = document.getElementById('update-log-btn');
     const updateLogModal = document.getElementById('update-log-modal');
@@ -635,22 +651,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // 加载更新日志内容
             loadUpdateLog();
         });
-        
-        // 关闭弹窗函数
-        function closeModal(modal) {
-            const modalContent = modal.querySelector('.modal-content');
-            // 添加关闭动画类
-            modal.classList.add('fade-out');
-            modalContent.classList.add('slide-out');
-            
-            // 动画结束后隐藏弹窗
-            setTimeout(() => {
-                modal.style.display = 'none';
-                // 移除动画类，以便下次打开时重新触发动画
-                modal.classList.remove('fade-out');
-                modalContent.classList.remove('slide-out');
-            }, 300); // 与动画持续时间相同
-        }
         
         // 关闭弹窗
         updateLogClose.addEventListener('click', function() {
@@ -668,6 +668,37 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape' && updateLogModal.style.display === 'block') {
                 closeModal(updateLogModal);
+            }
+        });
+    }
+    
+    // 为注意事项按钮添加点击事件监听器
+    const noticeBtn = document.getElementById('notice-btn');
+    const noticeModal = document.getElementById('notice-modal');
+    const noticeClose = noticeModal?.querySelector('.close');
+    
+    if (noticeBtn && noticeModal && noticeClose) {
+        // 显示弹窗
+        noticeBtn.addEventListener('click', function() {
+            noticeModal.style.display = 'block';
+        });
+        
+        // 关闭弹窗
+        noticeClose.addEventListener('click', function() {
+            closeModal(noticeModal);
+        });
+        
+        // 点击弹窗外部关闭弹窗
+        window.addEventListener('click', function(event) {
+            if (event.target === noticeModal) {
+                closeModal(noticeModal);
+            }
+        });
+        
+        // ESC键关闭弹窗
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && noticeModal.style.display === 'block') {
+                closeModal(noticeModal);
             }
         });
     }
