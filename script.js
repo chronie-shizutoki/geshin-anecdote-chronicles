@@ -48,6 +48,9 @@ const importData = function(event) {
 
 // DOM 加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
+    // 加载并显示前置弹窗
+    loadPrePopup();
+    
     // 渲染初始视图
     renderView();
     
@@ -70,6 +73,67 @@ document.addEventListener('DOMContentLoaded', function() {
     // 初始化任务计数显示
     updateTaskCounts();
 });
+
+// 加载并显示前置弹窗
+function loadPrePopup() {
+    // 获取弹窗元素
+    const popup = document.getElementById('prePopup');
+    const popupTitle = document.getElementById('prePopupTitle');
+    const popupContent = document.getElementById('prePopupContent');
+    const popupButton = document.getElementById('prePopupButton');
+    
+    // 检查是否存在弹窗元素
+    if (!popup || !popupTitle || !popupContent || !popupButton) {
+        console.error('无法找到弹窗元素');
+        return;
+    }
+    
+    // 检查用户是否已经关闭过弹窗（使用localStorage存储）
+    const hasClosedPopup = localStorage.getItem('prePopupClosed');
+    if (hasClosedPopup) {
+        return; // 用户已经关闭过弹窗，不再显示
+    }
+    
+    // 从JSON文件加载弹窗配置
+    fetch('data/popup-config.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('无法加载弹窗配置');
+            }
+            return response.json();
+        })
+        .then(config => {
+            // 检查是否需要显示弹窗
+            if (config.showPopup) {
+                // 设置弹窗内容
+                popupTitle.textContent = config.title || '通知';
+                popupContent.textContent = config.content || '';
+                popupButton.textContent = config.buttonText || '确定';
+                
+                // 显示弹窗，添加动画效果
+                setTimeout(() => {
+                    popup.classList.add('show');
+                }, 100);
+                
+                // 添加按钮点击事件
+                popupButton.addEventListener('click', function() {
+                    // 隐藏弹窗，添加动画效果
+                    popup.classList.remove('show');
+                    
+                    // 动画结束后完全隐藏
+                    setTimeout(() => {
+                        popup.style.display = 'none';
+                    }, config.animationDuration || 300);
+                    
+                    // 记录用户已经关闭过弹窗
+                    localStorage.setItem('prePopupClosed', 'true');
+                });
+            }
+        })
+        .catch(error => {
+            console.error('加载弹窗配置时出错:', error);
+        });
+}
 
 // 本地存储相关函数
 function getCompletedTasks() {

@@ -1,5 +1,32 @@
 /* 深色模式基础样式 */
 @media (prefers-color-scheme: dark) {
+    /* 前置弹窗 - 深色模式 */
+    body .pre-popup {
+        background-color: rgba(26, 26, 26, 0.9);
+        border-color: #5a5a5a;
+    }
+
+    body .pre-popup-content {
+        background-color: #2a2a2a;
+    }
+
+    body .pre-popup-content h3 {
+        color: #c8a78b;
+    }
+
+    body .pre-popup-content p {
+        color: #e0e0e0;
+    }
+
+    body .pre-popup-content .btn {
+        background-color: #7d4d32;
+        color: #fff;
+    }
+
+    body .pre-popup-content .btn:hover {
+        background-color: #633a25;
+    }
+
     body {
         background-color: #1a1a1a;
         color: #e0e0e0;
