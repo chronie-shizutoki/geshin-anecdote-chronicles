@@ -130,6 +130,162 @@ input[type="checkbox"]:checked {
     z-index: 1000;
 }
 
+/* 登录状态显示样式 */
+.auth-status-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.auth-status-text {
+    color: #8c543a;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* 登录/注册弹窗样式 */
+.auth-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    overflow-y: auto;
+}
+
+.auth-modal-content {
+    background-color: #f7f0e6;
+    max-width: 500px;
+    margin: 10% auto;
+    padding: 0;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-modal .close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #8c543a;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.auth-modal .close:hover {
+    color: #a86c4c;
+}
+
+/* 选项卡样式 */
+.auth-tabs {
+    display: flex;
+    border-bottom: 2px solid #d1b78e;
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #8c543a;
+    transition: all 0.3s ease;
+}
+
+.auth-tab:hover {
+    background-color: rgba(216, 187, 142, 0.2);
+}
+
+.auth-tab.active {
+    background-color: #e9d9c5;
+    border-bottom: 3px solid #a86c4c;
+}
+
+/* 表单样式 */
+.auth-form {
+    padding: 30px;
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.auth-form h3 {
+    color: #8c543a;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #d1b78e;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.auth-input:focus {
+    outline: none;
+    border-color: #a86c4c;
+    box-shadow: 0 0 0 3px rgba(168, 108, 76, 0.1);
+}
+
+.auth-submit-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 16px;
+    background-color: #a86c4c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth-submit-btn:hover {
+    background-color: #8c543a;
+}
+
+/* 提示消息样式 */
+.auth-note {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.auth-message {
+    padding: 0 30px 30px 30px;
+    text-align: center;
+    color: #8c543a;
+    font-weight: bold;
+}
+
 .scroll-top.visible {
     opacity: 1;
     transform: translateY(0);
@@ -454,6 +610,24 @@ input[type="checkbox"]:checked {
     display: flex;
     align-items: center;
     margin-left: auto;
+}
+
+input#auth-email {
+    padding: 8px 12px;
+    border: 1px solid #d1b78e;
+    border-radius: 4px;
+    background-color: #f7f0e6;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+input#auth-password {
+    padding: 8px 12px;
+    border: 1px solid #d1b78e;
+    border-radius: 4px;
+    background-color: #f7f0e6;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 /* 页脚 */

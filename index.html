@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="components/select.css">
     <script src="font/font.js" type="module" defer></script>
     <script src="components/select.js" type="module" defer></script>
+    <script src="supabase.js" type="module" defer></script>
     <script src="script.js" type="module" defer></script>
 </head>
 <body>
@@ -130,6 +131,51 @@
                     <!-- 字体授权操作按钮 -->
                     <button id="font-license-btn" class="btn">字体设置与授权声明</button>
                     <button id="feedback-btn" class="btn">反馈</button>
+                    
+                    <!-- 登录状态显示 -->
+                    <div class="auth-status-section">
+                        <span id="auth-status" class="auth-status-text">未登录</span>
+                        <button id="auth-signin-trigger" class="btn">登录/注册</button>
+                        <button id="auth-signout" class="btn" style="display: none;">登出</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- 登录/注册弹窗 -->
+        <div id="auth-modal" class="modal auth-modal" style="display: none;">
+            <div class="modal-content auth-modal-content">
+                <span class="close auth-close">&times;</span>
+                
+                <!-- 弹窗头部：登录和注册选项卡 -->
+                <div class="auth-tabs">
+                    <button id="signin-tab" class="auth-tab active">登录</button>
+                    <button id="signup-tab" class="auth-tab">注册</button>
+                </div>
+                
+                <!-- 登录表单 -->
+                <div id="signin-form" class="auth-form active">
+                    <h3>用户登录</h3>
+                    <input type="email" id="auth-email" placeholder="邮箱" class="auth-input">
+                    <input type="password" id="auth-password" placeholder="密码" class="auth-input">
+                    <button id="auth-signin" class="btn auth-submit-btn">登录</button>
+                </div>
+                
+                <!-- 注册表单 -->
+                <div id="signup-form" class="auth-form">
+                    <h3>用户注册</h3>
+                    <input type="email" id="auth-email-signup" placeholder="邮箱" class="auth-input">
+                    <input type="password" id="auth-password-signup" placeholder="密码" class="auth-input">
+                    <p class="auth-note">数据库可能会自动向您发送验证邮件，但此邮件您通常可能无需验证即可登录。</p>
+                    <p class="auth-note">注册完成后请您再次登录。</p>
+                    <p class="auth-note">如果您无法登录，请检查您的邮箱/密码是否正确，重置密码或需要找回数据等请使用表单反馈。</p>
+                    <button id="auth-signup" class="btn auth-submit-btn">注册</button>
+                </div>
+                
+                <!-- 错误/状态消息 -->
+                <div id="auth-message" class="auth-message"></div>
+            </div>
+        </div>
                     <!-- 字体授权提示弹窗 -->
                     <div id="font-license-modal" class="modal" style="display: none;">
                         <div class="modal-content">
