@@ -100,7 +100,7 @@ class FontManager {
         style.textContent = `
             @font-face {
                 font-family: "IPAMJM";
-                src: url("font/ipamjm.ttf");
+                src: url("font/ipamjm.woff2");
             }
             * {
                 font-family: "IPAMJM" !important;
