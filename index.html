@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="components/select.css">
     <script src="font/font.js" type="module" defer></script>
     <script src="components/select.js" type="module" defer></script>
-    <script src="supabase.js" type="module" defer></script>
     <script src="script.js" type="module" defer></script>
 </head>
 <body>
@@ -131,14 +130,6 @@
                     <!-- 字体授权操作按钮 -->
                     <button id="font-license-btn" class="btn">字体设置与授权声明</button>
                     <button id="feedback-btn" class="btn">反馈</button>
-                    <div class="auth-section">
-                        <input type="email" id="auth-email" placeholder="邮箱">
-                        <input type="password" id="auth-password" placeholder="密码">
-                        <button id="auth-signup" class="btn">注册</button>
-                        <button id="auth-signin" class="btn">登录</button>
-                        <button id="auth-signout" class="btn" style="display: none;">登出</button>
-                        <p id="auth-status"></p>
-                    </div>
                     <!-- 字体授权提示弹窗 -->
                     <div id="font-license-modal" class="modal" style="display: none;">
                         <div class="modal-content">
