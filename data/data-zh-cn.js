@@ -107,5 +107,6 @@ export const characterData = [
     { id: 105, character: "米卡 (1)", version: "月之一", travelName: "为信而来", location: "挪德卡莱-伦波岛-那夏镇", hiddenCondition: "", extraCharacter: "", description: "在挪德卡莱，你遇见了米卡。他准备把骑士团的信件送给法尔伽。不过，他到底是怎么带上这么多礼物的，难道这就是西风骑士的实力么？", isHidden: false },
     { id: 106, character: "辛焱 (1)", version: "月之一", travelName: "新演出", location: "挪德卡莱-伦波岛-那夏镇-旗舰酒馆", hiddenCondition: "", extraCharacter: "", description: "在那夏镇，你遇见了辛焱。她似乎在这里找到了新的灵感，或许，她之后会在那夏镇举办一场盛大的演出..?", isHidden: false },
     { id: 107, character: "烟绯 (1)", version: "月之一", travelName: "①学术所致", location: "挪德卡莱-伦波岛-那夏镇", hiddenCondition: "", extraCharacter: "", description: "在挪德卡莱，你遇见了烟绯。这位律法咨询师似乎正在为了研究学术而取材。不过，她到底想在这片「无法之地」里取得何种材料？这种材料又能怎样帮助她研究律法问题呢？", isHidden: false },
-    { id: 108, character: "烟绯 (2)", version: "月之一", travelName: "②噢，角…", location: "挪德卡莱-希汐岛-霜月之坊", hiddenCondition: "", extraCharacter: "菈乌玛", description: "在希汐岛，你遇见了烟绯。她似乎已经将自己的仙人血脉之事告诉了菈乌玛，而菈乌玛也...似乎很平静地接受了这个事实，并且允许了烟绯去「霜月之坊」的书库查阅资料...好吧，看来一切都很顺利。", isHidden: false }
+    { id: 108, character: "烟绯 (2)", version: "月之一", travelName: "②噢，角…", location: "挪德卡莱-希汐岛-霜月之坊", hiddenCondition: "", extraCharacter: "菈乌玛", description: "在希汐岛，你遇见了烟绯。她似乎已经将自己的仙人血脉之事告诉了菈乌玛，而菈乌玛也...似乎很平静地接受了这个事实，并且允许了烟绯去「霜月之坊」的书库查阅资料...好吧，看来一切都很顺利。", isHidden: false },
+    { id: 109, character: "夜兰 (1)", version: "月之二", travelName: "所为所求", location: "挪德卡莱-伦波岛-那夏镇", hiddenCondition: "完成魔神任务第六章第四幕的第二天才能接取", extraCharacter: "", description: "在那夏镇，你遇见了夜兰。她似乎是为了向「秘闻馆」求购情报才远道而来。但听她的口气，似乎对「秘闻馆」的老板奈芙尔很是提防...", isHidden: false }
 ];
