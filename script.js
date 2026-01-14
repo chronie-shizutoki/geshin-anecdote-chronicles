@@ -290,14 +290,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     // 初始化任务计数显示
     updateTaskCounts();
     
-    // 为新版本按钮添加点击事件监听器
-    const newVersionBtn = document.getElementById('new-version-btn');
-    if (newVersionBtn) {
-        newVersionBtn.addEventListener('click', function() {
-            window.open('new-version.html', '_self');
-        });
-    }
-    
     // 为反馈按钮添加点击事件监听器
     const feedbackBtn = document.getElementById('feedback-btn');
     if (feedbackBtn) {
