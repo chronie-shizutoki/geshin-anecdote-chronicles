@@ -916,6 +916,36 @@ input#auth-password {
     line-height: 1.8;
 }
 
+/* 更多选项弹窗内容样式 */
+.more-options-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.more-options-content .btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.more-options-content .auth-status-section {
+    margin-top: 10px;
+    padding-top: 15px;
+    border-top: 1px solid #d1b78e;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.more-options-content .auth-status-text {
+    font-size: 14px;
+    color: #8c543a;
+    font-weight: bold;
+}
+
 #update-log-content h1,
 #update-log-content h2,
 #update-log-content h3,

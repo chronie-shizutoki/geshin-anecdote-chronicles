@@ -322,6 +322,37 @@ document.addEventListener('DOMContentLoaded', async function() {
         }, 300); // 与动画持续时间相同
     }
     
+    // 为更多选项按钮添加点击事件监听器
+    const moreOptionsBtn = document.getElementById('more-options-btn');
+    const moreOptionsModal = document.getElementById('more-options-modal');
+    const moreOptionsClose = moreOptionsModal?.querySelector('.close');
+    
+    if (moreOptionsBtn && moreOptionsModal && moreOptionsClose) {
+        // 显示弹窗
+        moreOptionsBtn.addEventListener('click', function() {
+            moreOptionsModal.style.display = 'block';
+        });
+        
+        // 关闭弹窗
+        moreOptionsClose.addEventListener('click', function() {
+            closeModal(moreOptionsModal);
+        });
+        
+        // 点击弹窗外部关闭弹窗
+        window.addEventListener('click', function(event) {
+            if (event.target === moreOptionsModal) {
+                closeModal(moreOptionsModal);
+            }
+        });
+        
+        // ESC键关闭弹窗
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && moreOptionsModal.style.display === 'block') {
+                closeModal(moreOptionsModal);
+            }
+        });
+    }
+    
     // 为更新日志按钮添加点击事件监听器
     const updateLogBtn = document.getElementById('update-log-btn');
     const updateLogModal = document.getElementById('update-log-modal');
