@@ -1,163 +1,6 @@
 // 引入角色汇总数据
 import { characterData } from './data/data-zh-cn.js';
 import { initCustomSelectDisplay } from './components/select.js';
-import { supabase } from './supabase.js';
-
-// 声明全局变量
-let currentUser = null;
-
-// DOM元素变量声明
-let authStatusSection, authStatusText, authModalTrigger, authModal, authModalClose;
-let authTabLogin, authTabSignup, authFormLogin, authFormSignup;
-let authEmail, authPassword, authButton, authEmailSignup, authPasswordSignup;
-let authSignupButton, authLogoutButton, authMessage;
-
-// 弹窗交互逻辑
-function openAuthModal() {
-    if (authModal) {
-        authModal.style.display = 'block';
-        // 默认显示登录选项卡
-        showLoginTab();
-    }
-}
-
-function closeAuthModal() {
-    if (authModal) {
-        authModal.style.display = 'none';
-    }
-    // 清除表单和消息
-    if (authEmail && authPassword && authEmailSignup && authPasswordSignup && authMessage) {
-        authEmail.value = '';
-        authPassword.value = '';
-        authEmailSignup.value = '';
-        authPasswordSignup.value = '';
-        authMessage.textContent = '';
-    }
-}
-
-function showLoginTab() {
-    if (authTabLogin && authTabSignup && authFormLogin && authFormSignup) {
-        authTabLogin.classList.add('active');
-        authTabSignup.classList.remove('active');
-        authFormLogin.style.display = 'block';
-        authFormSignup.style.display = 'none';
-    }
-}
-
-function showSignupTab() {
-    if (authTabLogin && authTabSignup && authFormLogin && authFormSignup) {
-        authTabSignup.classList.add('active');
-        authTabLogin.classList.remove('active');
-        authFormSignup.style.display = 'block';
-        authFormLogin.style.display = 'none';
-    }
-}
-
-// 设置认证相关功能
-function setupAuthFeatures() {
-    // Supabase 认证状态监听
-    supabase.auth.onAuthStateChange((event, session) => {
-        if (session && authStatusText && authLogoutButton && authModalTrigger) {
-            currentUser = session.user;
-            authStatusText.textContent = `已登录: ${currentUser.email}`;
-            authLogoutButton.style.display = 'block';
-            authModalTrigger.style.display = 'none';
-            // 登录成功后，清空输入框并关闭弹窗
-            closeAuthModal();
-            // 用户登录后，尝试从云端同步数据
-            syncDataFromSupabase();
-        } else if (authStatusText && authLogoutButton && authModalTrigger) {
-            currentUser = null;
-            authStatusText.textContent = '未登录';
-            authLogoutButton.style.display = 'none';
-            authModalTrigger.style.display = 'inline-block';
-            // 登出后，清空输入框
-            if (authEmail && authPassword && authEmailSignup && authPasswordSignup) {
-                authEmail.value = '';
-                authPassword.value = '';
-                authEmailSignup.value = '';
-                authPasswordSignup.value = '';
-            }
-            // 用户登出后，清空本地数据或切换回本地存储
-            localStorage.removeItem('completedTasks');
-            renderView();
-        }
-        updateIncompleteCount();
-        updateTaskCounts();
-    });
-
-    // 注册功能
-    if (authSignupButton && authEmailSignup && authPasswordSignup && authMessage) {
-        authSignupButton.addEventListener('click', async () => {
-            const email = authEmailSignup.value;
-            const password = authPasswordSignup.value;
-            const { data, error } = await supabase.auth.signUp({
-                email: email,
-                password: password,
-            });
-            if (error) {
-                authMessage.textContent = `注册失败: ${error.message}`;
-                console.error('注册失败:', error);
-            } else if (data.user) {
-                authMessage.textContent = '注册成功，请检查您的邮箱进行验证。';
-                // 注册成功后清空密码，但保留邮箱
-                authPasswordSignup.value = '';
-            } else {
-                authMessage.textContent = '注册成功，但未返回用户数据。';
-                // 注册成功后清空密码，但保留邮箱
-                authPasswordSignup.value = '';
-            }
-        });
-    }
-
-    // 登录功能
-    if (authButton && authEmail && authPassword && authMessage) {
-        authButton.addEventListener('click', async () => {
-            const email = authEmail.value;
-            const password = authPassword.value;
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email: email,
-                password: password,
-            });
-            if (error) {
-                authMessage.textContent = `登录失败: ${error.message}`;
-                console.error('登录失败:', error);
-            } else if (data.user) {
-                authMessage.textContent = `登录成功: ${data.user.email}`;
-                // 登录成功后清空密码
-                authPassword.value = '';
-                // 延迟关闭弹窗，让用户看到成功消息
-                setTimeout(() => {
-                    closeAuthModal();
-                }, 1000);
-            } else {
-                authMessage.textContent = '登录成功，但未返回用户数据。';
-                // 登录成功后清空密码
-                authPassword.value = '';
-            }
-        });
-    }
-
-    // 登出功能
-    if (authLogoutButton && authMessage && authStatusText) {
-        authLogoutButton.addEventListener('click', async () => {
-            const { error } = await supabase.auth.signOut();
-            if (error) {
-                authMessage.textContent = `登出失败: ${error.message}`;
-                console.error('登出失败:', error);
-            } else {
-                authStatusText.textContent = '已登出';
-                // 登出后清空输入框
-                if (authEmail && authPassword && authEmailSignup && authPasswordSignup) {
-                    authEmail.value = '';
-                    authPassword.value = '';
-                    authEmailSignup.value = '';
-                    authPasswordSignup.value = '';
-                }
-            }
-        });
-    }
-}
 
 // 导出数据功能
 const exportData = function() {
@@ -186,24 +29,9 @@ const importData = function(event) {
             const importedData = JSON.parse(e.target.result);
             // 验证导入的数据结构
             if (typeof importedData === 'object') {
-                if (currentUser) {
-                    // 如果已登录，上传到Supabase
-                    const { error } = await supabase
-                        .from('completed_tasks')
-                        .upsert({ user_id: currentUser.id, tasks: importedData }, { onConflict: 'user_id' });
-                    if (error) {
-                        alert(`数据上传到云端失败: ${error.message}`);
-                        console.error('上传数据到Supabase时出错:', error);
-                    } else {
-                        alert('数据导入成功并已同步到云端！页面将刷新以显示最新数据。');
-                        renderView();
-                    }
-                } else {
-                    // 未登录，保存到本地存储
-                    localStorage.setItem('completedTasks', JSON.stringify(importedData));
-                    alert('数据导入成功！页面将刷新以显示最新数据。');
-                    renderView();
-                }
+                localStorage.setItem('completedTasks', JSON.stringify(importedData));
+                alert('数据导入成功！页面将刷新以显示最新数据。');
+                renderView();
             } else {
                 alert('无效的数据格式！请确保导入的是正确的JSON文件。');
             }
@@ -219,49 +47,8 @@ const importData = function(event) {
 
 // DOM 加载完成后执行 - 合并所有初始化代码到一个监听器
 document.addEventListener('DOMContentLoaded', async function() {
-    // 获取认证相关DOM元素
-    authStatusSection = document.querySelector('.auth-status-section');
-    authStatusText = document.getElementById('auth-status');
-    authModalTrigger = document.getElementById('auth-signin-trigger');
-    authModal = document.getElementById('auth-modal');
-    authModalClose = document.querySelector('#auth-modal .close');
-    
-    authTabLogin = document.getElementById('signin-tab');
-    authTabSignup = document.getElementById('signup-tab');
-    authFormLogin = document.getElementById('signin-form');
-    authFormSignup = document.getElementById('signup-form');
-    
-    authEmail = document.getElementById('auth-email');
-    authPassword = document.getElementById('auth-password');
-    authButton = document.getElementById('auth-signin');
-    authEmailSignup = document.getElementById('auth-email-signup');
-    authPasswordSignup = document.getElementById('auth-password-signup');
-    authSignupButton = document.getElementById('auth-signup');
-    authLogoutButton = document.getElementById('auth-signout');
-    authMessage = document.getElementById('auth-message');
-
     // 加载并显示前置弹窗
     loadPrePopup();
-    
-    // 设置认证功能
-    setupAuthFeatures();
-    
-    // 检查当前认证状态
-    const { data: { user } } = await supabase.auth.getUser();
-    if (user) {
-        currentUser = user;
-        if (authStatusText) {
-            authStatusText.textContent = `已登录: ${currentUser.email}`;
-        }
-        if (authLogoutButton) {
-            authLogoutButton.style.display = 'block';
-        }
-        if (authModalTrigger) {
-            authModalTrigger.style.display = 'none';
-        }
-        // 用户登录后，尝试从云端同步数据
-        syncDataFromSupabase();
-    }
     
     // 渲染初始视图
     await renderView();
@@ -542,21 +329,8 @@ function loadPrePopup() {
 
 // 本地存储相关函数
 async function getCompletedTasks() {
-    if (currentUser) {
-        const { data, error } = await supabase
-            .from('completed_tasks')
-            .select('tasks')
-            .eq('user_id', currentUser.id)
-            .single();
-        if (error && error.code !== 'PGRST116') { // PGRST116 means no rows found
-            console.error('从Supabase获取数据失败:', error);
-            return {};
-        }
-        return data ? data.tasks : {};
-    } else {
-        const stored = localStorage.getItem('completedTasks');
-        return stored ? JSON.parse(stored) : {};
-    }
+    const stored = localStorage.getItem('completedTasks');
+    return stored ? JSON.parse(stored) : {};
 }
 
 // 保存已完成任务
@@ -567,44 +341,8 @@ async function saveCompletedTask(taskId, isCompleted) {
     const completedTasks = await getCompletedTasks();
     completedTasks[taskId] = isCompleted;
     
-    if (currentUser) {
-        const { error } = await supabase
-            .from('completed_tasks')
-            .upsert({ user_id: currentUser.id, tasks: completedTasks }, { onConflict: 'user_id' });
-        if (error) {
-            console.error('保存数据到Supabase失败:', error);
-        }
-    } else {
-        localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
-    }
+    localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
     updateIncompleteCount();
-}
-
-// 从Supabase同步数据到本地
-async function syncDataFromSupabase() {
-    if (currentUser) {
-        const cloudTasks = await getCompletedTasks();
-        const localTasks = JSON.parse(localStorage.getItem('completedTasks') || '{}');
-        
-        // 合并数据：云端数据优先，但保留本地新增的
-        const mergedTasks = { ...localTasks, ...cloudTasks };
-        
-        // 更新本地存储
-        localStorage.setItem('completedTasks', JSON.stringify(mergedTasks));
-        
-        // 将合并后的数据上传回Supabase
-        const { error } = await supabase
-            .from('completed_tasks')
-            .upsert({ user_id: currentUser.id, tasks: mergedTasks }, { onConflict: 'user_id' });
-        if (error) {
-            console.error('合并数据并上传到Supabase失败:', error);
-        }
-        
-        // 清除缓存，确保下次渲染使用最新数据
-        clearFilterCache();
-        
-        renderView();
-    }
 }
 
 // 文档片段用于批量DOM操作
@@ -1039,30 +777,6 @@ function addEventListeners() {
             await filterData();
         });
     }
-
-    // 认证弹窗相关事件监听器
-    if (authModalTrigger) {
-        authModalTrigger.addEventListener('click', openAuthModal);
-    }
-
-    if (authModalClose) {
-        authModalClose.addEventListener('click', closeAuthModal);
-    }
-
-    if (authTabLogin) {
-        authTabLogin.addEventListener('click', showLoginTab);
-    }
-
-    if (authTabSignup) {
-        authTabSignup.addEventListener('click', showSignupTab);
-    }
-
-    // 点击弹窗外部关闭弹窗
-    window.addEventListener('click', function(event) {
-        if (event.target === authModal) {
-            closeAuthModal();
-        }
-    });
 }
 
 // 应用筛选条件
