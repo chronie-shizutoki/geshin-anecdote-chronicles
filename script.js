@@ -77,14 +77,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     // 初始化任务计数显示
     updateTaskCounts();
     
-    // 为反馈按钮添加点击事件监听器
-    const feedbackBtn = document.getElementById('feedback-btn');
-    if (feedbackBtn) {
-        feedbackBtn.addEventListener('click', function() {
-            window.open('https://wj.qq.com/s2/24219207/e16c/', '_blank');
-        });
-    }
-    
     // 关闭弹窗函数 - 提取为共享函数，供所有弹窗使用
     function closeModal(modal) {
         const modalContent = modal.querySelector('.modal-content');
